@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-graphite: #111111;
+  --color-brand-charcoal: #1B1B1B;
+  --color-brand-gunmetal: #2C2C2C;
+  --color-brand-white: #FFFFFF;
+  --color-brand-soft: #F9F9F9;
+  --color-brand-light-grey: #EAEAEA;
+  --color-brand-border: #D1D5DB;
+  --color-brand-silver: #888888;
+  --color-brand-steel: #707070;
+  --color-brand-gold: #C8A45D;
+  --color-brand-gold-light: #E0BC75;
+
+  --font-heading: var(--font-outfit), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-mono: var(--font-space-grotesk), monospace;
+}
+
+:root {
+  --background: var(--color-brand-soft);
+  --foreground: var(--color-brand-graphite);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+::selection {
+  background-color: var(--color-brand-gold);
+  color: var(--color-brand-graphite);
+}
+
+.glass-panel {
+  background: rgba(27, 27, 27, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #FFFFFF, #B5B5B5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(to right, #E0BC75, #C8A45D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
