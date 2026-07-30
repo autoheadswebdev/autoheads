@@ -17,7 +17,7 @@ const ARRIVING_SOON: CarProps[] = [
     fuel: "Petrol",
     transmission: "Manual",
     price: "₹10,25,000",
-    image: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=600&auto=format&fit=crop", // placeholder suv
+    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=600&auto=format&fit=crop", 
     isNew: true,
   },
   {
@@ -29,7 +29,7 @@ const ARRIVING_SOON: CarProps[] = [
     fuel: "Petrol",
     transmission: "Manual",
     price: "₹10,40,000",
-    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=600&auto=format&fit=crop", // placeholder sedan
+    image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=600&auto=format&fit=crop", 
     isNew: true,
   },
 ];
@@ -44,7 +44,7 @@ const INVENTORY: CarProps[] = [
     fuel: "Petrol",
     transmission: "Automatic",
     price: "₹22,95,000",
-    image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600&auto=format&fit=crop", 
+    image: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=600&auto=format&fit=crop", 
   },
   {
     id: "2",
@@ -55,7 +55,7 @@ const INVENTORY: CarProps[] = [
     fuel: "Petrol",
     transmission: "Manual",
     price: "₹10,25,000",
-    image: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: "3",
@@ -66,7 +66,7 @@ const INVENTORY: CarProps[] = [
     fuel: "Diesel",
     transmission: "Manual",
     price: "₹4,95,000",
-    image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: "4",
@@ -77,7 +77,7 @@ const INVENTORY: CarProps[] = [
     fuel: "Petrol",
     transmission: "Manual",
     price: "₹10,40,000",
-    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: "5",
@@ -88,7 +88,7 @@ const INVENTORY: CarProps[] = [
     fuel: "Petrol",
     transmission: "Manual",
     price: "₹9,95,000",
-    image: "https://images.unsplash.com/photo-1563720360172-67b8f3dce741?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: "6",

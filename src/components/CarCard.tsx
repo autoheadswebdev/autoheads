@@ -28,11 +28,12 @@ export default function CarCard({
     return (
       <div className="flex flex-col md:flex-row bg-brand-white border border-brand-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
         <div className="relative w-full md:w-1/3 h-48 md:h-auto bg-brand-light-grey flex-shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={car.image}
             alt={`${car.brand} ${car.model}`}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
           />
           {car.isNew && (
             <div className="absolute top-4 left-4 bg-brand-graphite text-brand-white text-xs px-2 py-1 rounded">
@@ -77,11 +78,12 @@ export default function CarCard({
   return (
     <div className="flex flex-col bg-brand-white border border-brand-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 group">
       <div className="relative w-full h-56 bg-brand-light-grey overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={car.image}
           alt={`${car.brand} ${car.model}`}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
         {car.isNew && (
           <div className="absolute top-4 left-4 bg-brand-graphite text-brand-white text-xs px-2 py-1 rounded">
