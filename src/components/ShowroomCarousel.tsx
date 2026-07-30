@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "./ui/Button";
 
@@ -130,9 +131,11 @@ export default function ShowroomCarousel() {
                     </span>
                   </div>
                   
-                  <Button variant="outline" className="mt-4 md:mt-0 rounded-full px-8 py-2 text-xs font-semibold uppercase tracking-wider">
-                    DETAILS
-                  </Button>
+                  <Link href={`/inventory/${car.id}`} className="mt-4 md:mt-0">
+                    <Button variant="outline" className="rounded-full px-8 py-2 text-xs font-semibold uppercase tracking-wider">
+                      DETAILS
+                    </Button>
+                  </Link>
                 </div>
               </SwiperSlide>
             );
