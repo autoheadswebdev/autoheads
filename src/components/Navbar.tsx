@@ -28,7 +28,6 @@ export default function Navbar() {
 
   const moreLinks = [
     { name: "About Us", href: "/about" },
-    { name: "Locations", href: "/locations" },
     { name: "Contact", href: "/contact" },
   ];
 

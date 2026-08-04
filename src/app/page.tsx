@@ -150,17 +150,17 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 h-auto lg:h-[550px] w-full">
           {[
             { title: "Luxury SUVs", count: "42 Vehicles", img: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=800&auto=format&fit=crop" },
-            { title: "Executive Sedans", count: "38 Vehicles", img: "https://images.unsplash.com/photo-1622244243685-645bd03fde62?q=80&w=800&auto=format&fit=crop" },
+            { title: "Executive Sedans", count: "38 Vehicles", img: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=800&auto=format&fit=crop" },
             { title: "Performance", count: "15 Vehicles", img: "https://images.unsplash.com/photo-1614200187524-dc4b892acf16?q=80&w=800&auto=format&fit=crop" },
             { title: "Electric", count: "24 Vehicles", img: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=800&auto=format&fit=crop" },
           ].map((cat, idx) => (
             <motion.div 
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
-              className="relative flex-1 h-[250px] lg:h-full lg:hover:flex-[3] rounded-3xl overflow-hidden group cursor-pointer transition-all duration-700 ease-out"
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              className="relative w-full h-[250px] lg:h-full lg:flex-1 lg:hover:flex-[3] rounded-3xl overflow-hidden group cursor-pointer transition-all duration-700 ease-out"
             >
               <Image 
                 src={cat.img}
