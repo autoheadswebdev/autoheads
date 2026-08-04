@@ -54,14 +54,16 @@ export default function ShowroomCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full relative py-12 overflow-hidden bg-brand-white">
-      <div className="container mx-auto px-4 md:px-8 mb-8 flex justify-between items-center">
-        <h2 className="text-3xl md:text-5xl font-heading font-medium text-brand-graphite uppercase tracking-wide">
-          SHOWROOM
-        </h2>
-        <Button variant="outline" className="hidden md:flex gap-2 rounded-full uppercase tracking-widest text-xs font-semibold px-6">
-          SHOWROOM <ArrowRight size={16} />
-        </Button>
+    <div className="w-full relative py-32 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-[#111111]/10 pb-8">
+        <div>
+          <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight text-[#111111]">
+            Featured <span className="italic text-[#111111]/60">Collections</span>
+          </h2>
+        </div>
+        <Link href="/inventory" className="text-[#111111] text-sm font-semibold uppercase tracking-widest hover:text-[#C8A45D] transition-colors flex items-center gap-2 group">
+          View All Inventory <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+        </Link>
       </div>
 
       <div className="w-full relative">
@@ -106,7 +108,7 @@ export default function ShowroomCarousel() {
                 >
                   {/* Certification Badge */}
                   {isActive && (
-                    <div className="absolute top-4 left-4 md:top-6 md:left-6 text-brand-graphite font-heading text-xs tracking-widest uppercase z-10">
+                    <div className="absolute top-4 left-4 md:top-6 md:left-6 text-[#111111] font-heading text-xs tracking-widest uppercase z-10">
                       {car.certification}
                     </div>
                   )}
@@ -131,23 +133,23 @@ export default function ShowroomCarousel() {
                   }`}
                 >
                   <div className="flex flex-col">
-                    <span className="text-xs tracking-widest text-brand-silver uppercase font-heading">{car.brand}</span>
-                    <h3 className="text-2xl md:text-3xl font-heading font-medium text-brand-graphite uppercase mt-1">
+                    <span className="text-xs tracking-widest text-[#111111]/60 uppercase font-heading">{car.brand}</span>
+                    <h3 className="text-2xl md:text-3xl font-heading font-medium text-[#111111] uppercase mt-1">
                       {car.model}
                     </h3>
                   </div>
                   
                   <div className="flex flex-col md:items-end mt-4 md:mt-0">
-                    <span className="text-xl md:text-2xl font-body font-medium text-brand-graphite">
+                    <span className="text-xl md:text-2xl font-body font-medium text-[#111111]">
                       {car.priceText.split(" kr.")[0]} kr.
                     </span>
-                    <span className="text-xs text-brand-silver">
+                    <span className="text-xs text-[#111111]/60">
                       pr. md.
                     </span>
                   </div>
                   
                   <Link href={`/inventory/${car.id}`} className="mt-4 md:mt-0">
-                    <Button variant="outline" className="rounded-full px-8 py-2 text-xs font-semibold uppercase tracking-wider">
+                    <Button variant="outline" className="rounded-full px-8 py-2 text-xs font-semibold uppercase tracking-wider border-[#111111]/20 text-[#111111] hover:bg-[#111111] hover:text-white transition-colors duration-300">
                       DETAILS
                     </Button>
                   </Link>
