@@ -42,26 +42,16 @@ export default function Navbar() {
         }`}>
           <div className="flex justify-between items-center h-14">
             
-            {/* Logo */}
-            <Link href="/" className="relative z-10 flex items-center gap-2 group">
-              <Image
-                src="/logo-icon.jpeg"
-                alt="AutoHeads Logo"
-                width={36}
-                height={36}
-                className={`rounded-full object-cover transition-all duration-500 ${isScrolled ? "scale-90" : "scale-100"}`}
-              />
-              <span style={{ fontFamily: 'Optima, Candara, sans-serif' }} className={`flex items-baseline tracking-wider transition-all duration-500 ${isScrolled ? "scale-90 origin-left" : "scale-100"}`}>
-                <span className={`${isScrolled ? "text-[#4a4a4a]" : "text-[#111111]"} font-normal flex items-baseline transition-colors`}>
-                  <span className="text-3xl md:text-4xl">A</span>
-                  <span className="text-xl md:text-2xl">uto</span>
-                </span>
-                <span className="text-black font-semibold flex items-baseline">
-                  <span className="text-3xl md:text-4xl">H</span>
-                  <span className="text-xl md:text-2xl">EAD</span>
-                  <span className="text-xl md:text-2xl">s</span>
-                </span>
-              </span>
+            <Link href="/" className="relative z-10 flex items-center gap-2 group h-full py-1">
+              {/* Force constraints so the square logo doesn't overflow */}
+              <div className="relative w-24 md:w-36 h-full flex items-center">
+                <Image
+                  src="/logo-full.jpeg"
+                  alt="AutoHeads Logo"
+                  fill
+                  className={`mix-blend-multiply object-contain transition-all duration-500 origin-left ${isScrolled ? "scale-[1.3] md:scale-[1.5]" : "scale-[1.6] md:scale-[2]"}`}
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation (Center) */}
