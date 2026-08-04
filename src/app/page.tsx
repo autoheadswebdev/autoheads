@@ -256,7 +256,7 @@ export default function Home() {
           </p>
           <Link href="/sell">
             <Button className="bg-[#C8A45D] text-white hover:bg-white hover:text-[#111111] rounded-full px-10 py-7 text-sm uppercase tracking-[0.15em] font-semibold transition-all duration-300">
-              Free Evaluation
+              Connect Now
             </Button>
           </Link>
         </div>

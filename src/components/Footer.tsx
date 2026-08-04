@@ -13,13 +13,13 @@ export default function Footer() {
           
           {/* Brand Info (Left) */}
           <div className="lg:col-span-4 flex flex-col">
-            <Link href="/" className="mb-8 block">
-              <div className="relative w-40 md:w-56 h-16 md:h-20 flex items-center">
+            <Link href="/" className="mb-8 block mix-blend-multiply">
+              <div className="relative w-48 md:w-64 h-16 md:h-20 flex items-center overflow-hidden">
                 <Image 
-                  src="/logo-full.jpeg" 
+                  src="/autoheads-logo.jpeg" 
                   alt="AutoHeads Logo" 
                   fill 
-                  className="mix-blend-multiply object-contain object-left scale-[1.3] md:scale-[1.5] origin-left"
+                  className="object-contain object-left scale-[1.3] md:scale-[1.5] origin-left"
                 />
               </div>
             </Link>

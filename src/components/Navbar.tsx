@@ -42,14 +42,14 @@ export default function Navbar() {
         }`}>
           <div className="flex justify-between items-center h-14">
             
-            <Link href="/" className="relative z-10 flex items-center gap-2 group h-full py-1">
-              {/* Force constraints so the square logo doesn't overflow */}
-              <div className="relative w-24 md:w-36 h-full flex items-center">
+            <Link href="/" className="relative z-10 flex items-center gap-2 group h-full py-1 mix-blend-multiply">
+              {/* Use overflow-hidden and scale to perfectly crop the white padding */}
+              <div className="relative w-32 md:w-40 h-full flex items-center overflow-hidden">
                 <Image
-                  src="/logo-full.jpeg"
+                  src="/autoheads-logo.jpeg"
                   alt="AutoHeads Logo"
                   fill
-                  className={`mix-blend-multiply object-contain transition-all duration-500 origin-left ${isScrolled ? "scale-[1.3] md:scale-[1.5]" : "scale-[1.6] md:scale-[2]"}`}
+                  className={`object-contain object-center transition-all duration-500 scale-[1.3] md:scale-[1.5] ${isScrolled ? "scale-[1.2]" : ""}`}
                 />
               </div>
             </Link>
