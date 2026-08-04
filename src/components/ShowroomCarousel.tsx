@@ -2,7 +2,9 @@
 
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Mousewheel } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/effect-coverflow";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
@@ -58,19 +60,32 @@ export default function ShowroomCarousel() {
           SHOWROOM
         </h2>
         <Button variant="outline" className="hidden md:flex gap-2 rounded-full uppercase tracking-widest text-xs font-semibold px-6">
-          BESØG SHOWROOM <ArrowRight size={16} />
+          SHOWROOM <ArrowRight size={16} />
         </Button>
       </div>
 
       <div className="w-full relative">
         <Swiper
+          effect="coverflow"
           centeredSlides={true}
           slidesPerView={1.2}
-          spaceBetween={20}
           breakpoints={{
-            640: { slidesPerView: 1.5, spaceBetween: 30 },
-            1024: { slidesPerView: 2.2, spaceBetween: 50 },
+            640: { slidesPerView: 1.5 },
+            1024: { slidesPerView: 2.2 },
           }}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 150,
+            modifier: 1.5,
+            slideShadows: false,
+          }}
+          mousewheel={{
+            forceToAxis: true,
+            sensitivity: 0.1,
+            releaseOnEdges: true,
+          }}
+          modules={[EffectCoverflow, Mousewheel]}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
           className="w-full !pb-12"
           grabCursor={true}
@@ -81,8 +96,8 @@ export default function ShowroomCarousel() {
             return (
               <SwiperSlide key={car.id} className="transition-all duration-700 ease-out">
                 <div
-                  className={`relative w-full rounded-2xl overflow-hidden transition-all duration-700 ${
-                    isActive ? "scale-100 opacity-100" : "scale-[0.85] opacity-60"
+                  className={`relative w-full rounded-2xl overflow-hidden transition-opacity duration-700 ${
+                    isActive ? "opacity-100" : "opacity-60"
                   }`}
                   style={{
                     backgroundColor: "var(--color-brand-light-grey)",

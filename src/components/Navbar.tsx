@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "./ui/Button";
 
 export default function Navbar() {
@@ -14,7 +14,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -22,6 +22,7 @@ export default function Navbar() {
 
   const mainLinks = [
     { name: "Home", href: "/" },
+    { name: "Inventory", href: "/inventory" },
     { name: "Sell Your Car", href: "/sell" },
   ];
 
@@ -32,126 +33,141 @@ export default function Navbar() {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScrolled ? "bg-brand-white/90 backdrop-blur-md py-4 shadow-sm border-b border-brand-border" : "bg-transparent py-6"
-      }`}
-    >
-      <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" className="relative z-10 flex items-center gap-2">
-          <Image
-            src="/logo-icon.jpeg"
-            alt="AutoHeads Logo"
-            width={40}
-            height={40}
-            className="rounded-full object-cover"
-          />
-          <span className="text-2xl font-heading font-semibold text-brand-graphite tracking-wide">
-            AUTOHEADS
-          </span>
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {mainLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-brand-graphite hover:text-brand-silver transition-colors duration-300 font-heading"
-            >
-              {link.name}
-            </Link>
-          ))}
-          
-          {/* Dropdown for More */}
-          <div 
-            className="relative"
-            onMouseEnter={() => setMoreDropdownOpen(true)}
-            onMouseLeave={() => setMoreDropdownOpen(false)}
-          >
-            <button className="flex items-center gap-1 text-sm font-medium text-brand-graphite hover:text-brand-silver transition-colors duration-300 font-heading py-2">
-              More <ChevronDown size={16} className={`transition-transform duration-300 ${moreDropdownOpen ? "rotate-180" : ""}`} />
-            </button>
+    <>
+      <header className="fixed top-0 left-0 w-full z-50 px-4 md:px-8 py-4 transition-all duration-500 pointer-events-none">
+        <div className={`mx-auto max-w-7xl pointer-events-auto transition-all duration-500 ${
+          isScrolled 
+            ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 rounded-full border border-white/40 py-2 px-6" 
+            : "bg-transparent py-4 px-2"
+        }`}>
+          <div className="flex justify-between items-center h-14">
             
-            <AnimatePresence>
-              {moreDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute top-full left-0 w-48 bg-brand-graphite rounded-lg shadow-xl overflow-hidden py-2 mt-2 border border-brand-gunmetal"
+            {/* Logo */}
+            <Link href="/" className="relative z-10 flex items-center gap-2 group">
+              <Image
+                src="/logo-icon.jpeg"
+                alt="AutoHeads Logo"
+                width={36}
+                height={36}
+                className={`rounded-full object-cover transition-all duration-500 ${isScrolled ? "scale-90" : "scale-100"}`}
+              />
+              <span style={{ fontFamily: 'Optima, Candara, sans-serif' }} className={`flex items-baseline tracking-wider transition-all duration-500 ${isScrolled ? "scale-90 origin-left" : "scale-100"}`}>
+                <span className={`${isScrolled ? "text-[#4a4a4a]" : "text-[#111111]"} font-normal flex items-baseline transition-colors`}>
+                  <span className="text-3xl md:text-4xl">A</span>
+                  <span className="text-xl md:text-2xl">uto</span>
+                </span>
+                <span className="text-black font-semibold flex items-baseline">
+                  <span className="text-3xl md:text-4xl">H</span>
+                  <span className="text-xl md:text-2xl">EAD</span>
+                  <span className="text-xl md:text-2xl">s</span>
+                </span>
+              </span>
+            </Link>
+
+            {/* Desktop Navigation (Center) */}
+            <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+              {mainLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-medium text-[#111111] hover:text-[#C8A45D] transition-colors duration-300 font-heading"
                 >
-                  {moreLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className="block px-4 py-2.5 text-sm font-medium text-brand-white hover:bg-brand-charcoal hover:text-brand-gold transition-colors duration-200"
+                  {link.name}
+                </Link>
+              ))}
+              
+              {/* Dropdown for More */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setMoreDropdownOpen(true)}
+                onMouseLeave={() => setMoreDropdownOpen(false)}
+              >
+                <button className="flex items-center gap-1 text-sm font-medium text-[#111111] hover:text-[#C8A45D] transition-colors duration-300 font-heading py-2">
+                  More <ChevronDown size={14} className={`transition-transform duration-300 ${moreDropdownOpen ? "rotate-180" : ""}`} />
+                </button>
+                
+                <AnimatePresence>
+                  {moreDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/10 overflow-hidden py-3 mt-4 border border-white/50"
                     >
-                      {link.name}
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      {moreLinks.map((link) => (
+                        <Link
+                          key={link.name}
+                          href={link.href}
+                          className="block px-6 py-2.5 text-sm font-medium text-[#2B2B2B] hover:bg-[#FAF9F6] hover:text-[#C8A45D] transition-colors duration-200"
+                        >
+                          {link.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </nav>
+
+            {/* Desktop CTA (Right) */}
+            <div className="hidden md:block">
+              <Link href="/inventory">
+                <Button className="bg-[#111111] hover:bg-[#C8A45D] text-white rounded-full px-6 py-5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 group flex items-center gap-2 shadow-md hover:shadow-xl hover:-translate-y-0.5">
+                  Explore Inventory
+                  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={14} />
+                </Button>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className="md:hidden text-[#111111] p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-        </nav>
-
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <Link href="/inventory">
-            <Button size="sm">Explore Inventory</Button>
-          </Link>
         </div>
+      </header>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden relative z-10 text-brand-graphite p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle mobile menu"
-        >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Mobile Navigation Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-brand-white border-b border-brand-border py-6 px-4 flex flex-col gap-6 md:hidden shadow-lg"
+            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-2xl pt-32 px-6 pb-6 md:hidden flex flex-col"
           >
-            {mainLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-brand-graphite hover:text-brand-silver transition-colors duration-300 font-heading"
-              >
-                {link.name}
-              </Link>
-            ))}
-            <div className="flex flex-col gap-4 pl-4 border-l-2 border-brand-border">
-              {moreLinks.map((link) => (
-                <Link
+            <nav className="flex flex-col gap-6 flex-grow">
+              {[...mainLinks, ...moreLinks].map((link, i) => (
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium text-brand-silver hover:text-brand-graphite transition-colors duration-300"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    href={link.href}
+                    className="text-3xl font-heading font-medium text-[#111111] hover:text-[#C8A45D] transition-colors block"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
+            </nav>
+            <div className="pt-8 border-t border-[#E8E8E8]">
+              <Link href="/inventory" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full bg-[#111111] hover:bg-[#C8A45D] text-white rounded-full py-6 text-sm uppercase tracking-widest font-semibold transition-all">
+                  Explore Inventory
+                </Button>
+              </Link>
             </div>
-            <Link href="/inventory" onClick={() => setMobileMenuOpen(false)}>
-              <Button className="w-full">Explore Inventory</Button>
-            </Link>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

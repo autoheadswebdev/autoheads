@@ -57,6 +57,18 @@ const PREMIUM_INVENTORY: CarProps[] = [
     price: "₹18,50,000",
     image: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=600&auto=format&fit=crop",
   },
+  // Adding one more for a better grid look
+  {
+    id: "7",
+    year: 2023,
+    brand: "Porsche",
+    model: "Macan GTS",
+    mileage: "12,000",
+    fuel: "Petrol",
+    transmission: "Automatic",
+    price: "₹85,00,000",
+    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=600&auto=format&fit=crop",
+  }
 ];
 
 const LITE_INVENTORY: CarProps[] = [
@@ -111,84 +123,89 @@ export default function InventoryPage() {
   const [category, setCategory] = useState<"premium" | "lite">("premium");
 
   return (
-    <div className="bg-brand-soft min-h-screen pb-24">
-      {/* Top Navigation / Filters Area */}
-      <div className="container mx-auto px-4 md:px-8 pt-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-            <h1 className="text-3xl font-heading font-semibold text-brand-graphite">Browse Cars</h1>
+    <div className="bg-[#050505] min-h-screen pb-24 text-white">
+      {/* Top Header Background Glow */}
+      <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-brand-graphite/40 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-4 md:px-8 pt-12 relative z-10">
+        
+        {/* Header & View Controls */}
+        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-10 gap-8">
+          
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+            <h1 className="text-4xl md:text-5xl font-heading font-semibold text-white tracking-tight">Collection</h1>
             
-            {/* Premium / Lite Toggle */}
-            <div className="flex items-center bg-brand-white border border-brand-border rounded-full p-1 shadow-sm">
+            {/* Segmented Control for Premium/Lite */}
+            <div className="flex items-center bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-1.5 shadow-xl">
               <button
                 onClick={() => setCategory("premium")}
-                className={`flex items-center gap-2 px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                className={`flex items-center gap-2 px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   category === "premium" 
-                    ? "bg-brand-graphite text-brand-white shadow-md" 
-                    : "text-brand-silver hover:text-brand-graphite"
+                    ? "bg-white text-black shadow-lg" 
+                    : "text-brand-silver hover:text-white"
                 }`}
               >
-                <span className="text-lg">✨</span> Premium
+                Premium
               </button>
               <button
                 onClick={() => setCategory("lite")}
-                className={`flex items-center gap-2 px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                className={`flex items-center gap-2 px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   category === "lite" 
-                    ? "bg-brand-graphite text-brand-white shadow-md" 
-                    : "text-brand-silver hover:text-brand-graphite"
+                    ? "bg-white text-black shadow-lg" 
+                    : "text-brand-silver hover:text-white"
                 }`}
               >
-                <span className="text-lg">⚡</span> AH Lite
+                AH Lite
               </button>
             </div>
           </div>
           
-          {/* Grid / List View Toggle */}
-          <div className="flex items-center gap-2 bg-brand-white border border-brand-border rounded-lg p-1 self-end md:self-auto">
+          {/* Controls Right */}
+          <div className="flex items-center gap-4 self-end xl:self-auto">
             {/* View Toggles */}
-            <div className="flex items-center bg-brand-white rounded-lg border border-brand-border p-1">
+            <div className="flex items-center bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-1.5 shadow-xl">
               <button 
                 onClick={() => setView("grid")}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${view === "grid" ? "bg-brand-graphite text-brand-white" : "text-brand-silver hover:text-brand-graphite"}`}
+                className={`flex items-center justify-center w-10 h-10 rounded-xl transition-colors ${view === "grid" ? "bg-white text-black" : "text-brand-silver hover:text-white"}`}
+                aria-label="Grid View"
               >
-                <LayoutGrid size={16} /> Grid
+                <LayoutGrid size={18} />
               </button>
               <button 
                 onClick={() => setView("list")}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${view === "list" ? "bg-brand-graphite text-brand-white" : "text-brand-silver hover:text-brand-graphite"}`}
+                className={`flex items-center justify-center w-10 h-10 rounded-xl transition-colors ${view === "list" ? "bg-white text-black" : "text-brand-silver hover:text-white"}`}
+                aria-label="List View"
               >
-                <List size={16} /> List
+                <List size={18} />
               </button>
             </div>
 
             {/* Sort Dropdown */}
-            <div className="flex items-center gap-2 whitespace-nowrap">
-              <span className="text-sm font-medium text-brand-graphite">Sort:</span>
-              <div className="relative">
-                <select className="appearance-none bg-brand-white border border-brand-border rounded-lg pl-4 pr-10 py-2 text-sm text-brand-graphite font-medium focus:outline-none focus:border-brand-silver cursor-pointer">
-                  <option>Newest First</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Mileage: Low to High</option>
-                </select>
-                <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-graphite pointer-events-none" />
-              </div>
+            <div className="relative shadow-xl">
+              <select className="appearance-none bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl pl-5 pr-12 py-3.5 text-sm text-white font-medium focus:outline-none focus:border-white/30 cursor-pointer">
+                <option className="bg-[#111]">Newest First</option>
+                <option className="bg-[#111]">Price: Low to High</option>
+                <option className="bg-[#111]">Price: High to Low</option>
+                <option className="bg-[#111]">Mileage: Low to High</option>
+              </select>
+              <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-silver pointer-events-none" />
             </div>
           </div>
         </div>
 
+        {/* Filters Panel */}
         <InventoryFilters />
 
         {/* Arriving Soon Section */}
-        <div className="mb-12">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-2 h-2 rounded-full bg-brand-graphite animate-pulse" />
-            <h2 className="text-xl font-heading font-semibold text-brand-graphite">Arriving Soon</h2>
+        <div className="mb-16 mt-8">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-2.5 h-2.5 rounded-full bg-white animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+            <h2 className="text-xl font-mono tracking-widest uppercase text-white font-semibold">Arriving Soon</h2>
           </div>
           
-          <div className="flex gap-6 overflow-x-auto pb-6 snap-x hide-scrollbar">
+          <div className="flex gap-6 overflow-x-auto pb-8 snap-x hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {ARRIVING_SOON.map((car) => (
-              <div key={car.id} className="min-w-[280px] md:min-w-[350px] snap-start">
+              <div key={car.id} className="min-w-[320px] md:min-w-[400px] snap-start">
                 <CarCard car={car} view="grid" />
               </div>
             ))}
@@ -196,13 +213,14 @@ export default function InventoryPage() {
         </div>
 
         {/* Main Inventory */}
-        <div className={view === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" : "flex flex-col gap-6"}>
+        <div className={view === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" : "flex flex-col gap-6"}>
           {(category === "premium" ? PREMIUM_INVENTORY : LITE_INVENTORY).map((car) => (
             <motion.div
               key={car.id}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
             >
               <CarCard car={car} view={view} />
             </motion.div>
@@ -210,9 +228,9 @@ export default function InventoryPage() {
         </div>
 
         {/* Load More */}
-        <div className="mt-16 flex justify-center">
-          <button className="flex items-center gap-2 px-8 py-3 rounded-full border-2 border-brand-graphite text-brand-graphite font-semibold hover:bg-brand-graphite hover:text-brand-white transition-colors">
-            Load More Cars <ArrowRight size={18} />
+        <div className="mt-20 flex justify-center">
+          <button className="flex items-center gap-3 px-10 py-4 rounded-full border border-white/20 text-white font-semibold hover:bg-white hover:text-black transition-all duration-300 text-sm tracking-widest uppercase">
+            Load More <ArrowRight size={18} />
           </button>
         </div>
       </div>
