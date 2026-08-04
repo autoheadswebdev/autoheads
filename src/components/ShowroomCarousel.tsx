@@ -106,12 +106,7 @@ export default function ShowroomCarousel() {
                     aspectRatio: "16/9",
                   }}
                 >
-                  {/* Certification Badge */}
-                  {isActive && (
-                    <div className="absolute top-4 left-4 md:top-6 md:left-6 text-[#111111] font-heading text-xs tracking-widest uppercase z-10">
-                      {car.certification}
-                    </div>
-                  )}
+                  {/* Certification Badge Removed */}
 
                   {/* Car Image - Object Contain to show full car with padding */}
                   <div className="absolute inset-4 md:inset-8 flex items-center justify-center">
