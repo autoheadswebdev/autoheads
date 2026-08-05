@@ -55,13 +55,13 @@ export default function ShowroomCarousel() {
 
   return (
     <div className="w-full relative py-32 overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-[#111111]/10 pb-8">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-[#111111]/10 dark:border-white/10 pb-8 transition-colors duration-500">
         <div>
-          <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight text-[#111111]">
-            Featured <span className="italic text-[#111111]/60">Collections</span>
+          <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight text-[#111111] dark:text-white transition-colors duration-500">
+            Featured <span className="italic text-[#111111]/60 dark:text-white/60">Collections</span>
           </h2>
         </div>
-        <Link href="/inventory" className="text-[#111111] text-sm font-semibold uppercase tracking-widest hover:text-[#C8A45D] transition-colors flex items-center gap-2 group">
+        <Link href="/inventory" className="text-[#111111] dark:text-white text-sm font-semibold uppercase tracking-widest hover:text-[#C8A45D] dark:hover:text-[#C8A45D] transition-colors flex items-center gap-2 group">
           View All Inventory <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
@@ -98,11 +98,10 @@ export default function ShowroomCarousel() {
             return (
               <SwiperSlide key={car.id} className="transition-all duration-700 ease-out">
                 <div
-                  className={`relative w-full rounded-2xl overflow-hidden transition-opacity duration-700 ${
+                  className={`relative w-full rounded-2xl overflow-hidden transition-all duration-700 bg-[#EAEAEA] dark:bg-[#1B1B1B] ${
                     isActive ? "opacity-100" : "opacity-60"
                   }`}
                   style={{
-                    backgroundColor: "var(--color-brand-light-grey)",
                     aspectRatio: "16/9",
                   }}
                 >
@@ -115,7 +114,7 @@ export default function ShowroomCarousel() {
                       alt={`${car.brand} ${car.model}`}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-contain mix-blend-darken drop-shadow-2xl"
+                      className="object-contain mix-blend-darken dark:mix-blend-normal drop-shadow-2xl"
                       priority={index === 0}
                     />
                   </div>
@@ -128,23 +127,23 @@ export default function ShowroomCarousel() {
                   }`}
                 >
                   <div className="flex flex-col">
-                    <span className="text-xs tracking-widest text-[#111111]/60 uppercase font-heading">{car.brand}</span>
-                    <h3 className="text-2xl md:text-3xl font-heading font-medium text-[#111111] uppercase mt-1">
+                    <span className="text-xs tracking-widest text-[#111111]/60 dark:text-white/60 uppercase font-heading transition-colors duration-500">{car.brand}</span>
+                    <h3 className="text-2xl md:text-3xl font-heading font-medium text-[#111111] dark:text-white uppercase mt-1 transition-colors duration-500">
                       {car.model}
                     </h3>
                   </div>
                   
                   <div className="flex flex-col md:items-end mt-4 md:mt-0">
-                    <span className="text-xl md:text-2xl font-body font-medium text-[#111111]">
+                    <span className="text-xl md:text-2xl font-body font-medium text-[#111111] dark:text-white transition-colors duration-500">
                       {car.priceText.split(" kr.")[0]} kr.
                     </span>
-                    <span className="text-xs text-[#111111]/60">
+                    <span className="text-xs text-[#111111]/60 dark:text-white/60 transition-colors duration-500">
                       pr. md.
                     </span>
                   </div>
                   
                   <Link href={`/inventory/${car.id}`} className="mt-4 md:mt-0">
-                    <Button variant="outline" className="rounded-full px-8 py-2 text-xs font-semibold uppercase tracking-wider border-[#111111]/20 text-[#111111] hover:bg-[#111111] hover:text-white transition-colors duration-300">
+                    <Button variant="outline" className="rounded-full px-8 py-2 text-xs font-semibold uppercase tracking-wider border-[#111111]/20 dark:border-white/20 text-[#111111] dark:text-white hover:bg-[#111111] dark:hover:bg-white hover:text-white dark:hover:text-[#111111] transition-colors duration-300">
                       DETAILS
                     </Button>
                   </Link>

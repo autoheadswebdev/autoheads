@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle, ChevronDown, ChevronRight, ShieldCheck, MapPin, Gauge, Droplets, Zap, Activity, Clock } from "lucide-react";
+import { ArrowRight, CheckCircle, ChevronDown, ChevronRight, ShieldCheck, MapPin, Gauge, Droplets, Zap, Activity, Clock, Car, IndianRupee, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import ShowroomCarousel from "@/components/ShowroomCarousel";
 
@@ -24,135 +24,159 @@ export default function Home() {
   const duplicatedBrands = [...brands, ...brands];
 
   return (
-    <div ref={containerRef} className="flex flex-col w-full bg-[#FAF8F4] text-[#111111] overflow-x-hidden selection:bg-[#C8A45D] selection:text-white">
+    <div ref={containerRef} className="flex flex-col w-full bg-[#FAF8F4] dark:bg-[#111111] text-[#111111] dark:text-white overflow-x-hidden selection:bg-[#C8A45D] selection:text-white transition-colors duration-500">
       
-      {/* 1. CINEMATIC HERO */}
-      <section className="relative w-full min-h-screen pt-32 pb-16 px-6 lg:px-12 flex flex-col justify-center items-center">
-        <div className="max-w-[1600px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center h-full relative z-10">
+      {/* 1. CINEMATIC HERO (Matching Mockup 100%) */}
+      <section className="relative w-full min-h-screen pt-16 md:pt-20 lg:pt-22 pb-6 px-6 lg:px-12 flex flex-col justify-between items-center overflow-hidden">
+        <div className="max-w-[1600px] w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 flex-grow">
           
           {/* Hero Left (Typography) */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="flex flex-col space-y-6 md:space-y-8 z-20"
+            className="lg:col-span-5 flex flex-col space-y-5 md:space-y-6 z-20"
           >
             <div className="inline-flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#C8A45D]" />
-              <span className="text-xs md:text-sm font-mono tracking-[0.2em] uppercase font-semibold text-[#111111]/60">
-                Premium Pre-Owned Automobiles
+              <span className="w-6 h-[1.5px] bg-[#111111] dark:bg-white" />
+              <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-[#111111]/70 dark:text-white/70">
+                PREMIUM PRE-OWNED AUTOMOBILES
               </span>
             </div>
             
-            <h1 className="text-6xl md:text-8xl lg:text-[6.5rem] leading-[1] font-heading font-medium tracking-tight text-[#111111]">
-              Find Your Next <br />
-              <span className="italic text-[#111111]/80 pr-4">Dream Machine</span>
+            <h1 className="text-5xl md:text-7xl lg:text-[4.2rem] xl:text-[4.8rem] leading-[0.95] font-heading font-extrabold tracking-tight uppercase text-[#111111] dark:text-white">
+              DRIVEN <br />
+              BY PASSION <br />
+              <span className="text-[#111111]/30 dark:text-white/30 font-light">BACKED BY</span> <br />
+              <span className="text-[#111111]/30 dark:text-white/30 font-light">TRUST</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-[#111111]/70 max-w-xl font-light leading-relaxed">
-              AutoHeads curates India's finest collection of premium pre-owned vehicles, each rigorously inspected to ensure uncompromised quality, performance, and peace of mind.
+            <p className="text-sm md:text-base text-[#111111]/70 dark:text-white/70 max-w-lg font-light leading-relaxed">
+              India's premier destination for luxury pre-owned cars, handpicked for those who expect more from every drive.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <Link href="/inventory" className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto rounded-full bg-[#111111] text-white hover:bg-[#C8A45D] px-8 py-7 text-xs uppercase tracking-[0.15em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-[#C8A45D]/20 hover:-translate-y-1">
-                  Explore Inventory
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link href="/inventory">
+                <Button className="rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl">
+                  EXPLORE INVENTORY
                   <ArrowRight className="group-hover:translate-x-1 transition-transform" size={16} />
                 </Button>
               </Link>
-              <Link href="/sell" className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full sm:w-auto rounded-full border border-[#111111]/10 bg-white/50 backdrop-blur-md text-[#111111] hover:border-[#111111] px-8 py-7 text-xs uppercase tracking-[0.15em] font-semibold transition-all duration-300">
-                  Sell Your Car
+              <Link href="/sell">
+                <Button variant="outline" className="rounded-full border border-[#111111]/30 dark:border-white/30 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300">
+                  SELL YOUR CAR
                 </Button>
               </Link>
             </div>
 
+            {/* Bottom Stat Badges with Icons */}
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 1 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-12 mt-8 border-t border-[#111111]/10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-[#111111]/10 dark:border-white/10"
             >
               {[
-                { val: "500+", label: "Premium Cars" },
-                { val: "98%", label: "Satisfaction" },
-                { val: "150", label: "Point Inspection" },
-                { val: "Available", label: "Finance Assist" },
+                { icon: Car, val: "200+", label: "Premium Cars" },
+                { icon: ShieldCheck, val: "165+", label: "Quality Checks" },
+                { icon: IndianRupee, val: "100%", label: "Transparent" },
+                { icon: Users, val: "5000+", label: "Happy Clients" },
               ].map((stat, i) => (
-                <div key={i}>
-                  <div className="text-2xl md:text-3xl font-heading font-medium text-[#111111] mb-1">{stat.val}</div>
-                  <div className="text-[10px] font-mono tracking-widest uppercase text-[#111111]/50">{stat.label}</div>
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full border border-[#111111]/20 dark:border-white/20 flex items-center justify-center shrink-0 text-[#111111] dark:text-white">
+                    <stat.icon size={18} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-[#111111] dark:text-white font-heading">{stat.val}</span>
+                    <span className="text-[10px] text-[#111111]/60 dark:text-white/60 font-body leading-tight">{stat.label}</span>
+                  </div>
                 </div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Hero Right (Floating Image) */}
+          {/* Hero Right (Architectural Car Seamless Blended) */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="relative h-[50vh] lg:h-[85vh] min-h-[400px] w-full z-10"
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="lg:col-span-7 relative h-[480px] md:h-[640px] w-full flex items-center justify-center -mr-6 lg:-mr-12"
           >
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl shadow-black/10 border border-white/50"
-            >
+            <div className="relative w-full h-full overflow-hidden group">
               <Image 
-                src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=2000&auto=format&fit=crop" 
-                alt="Premium Porsche" 
+                src="/hero-bg.png" 
+                alt="Luxury White BMW M5 in Architectural Arch" 
                 fill 
-                className="object-cover scale-105"
+                className="object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
                 priority
               />
-              {/* Soft Gradient Overlay for depth */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#111111]/40 via-transparent to-transparent mix-blend-multiply" />
-            </motion.div>
+              
+              {/* Soft Seamless Gradient Blends */}
+              <div className="absolute inset-y-0 left-0 w-32 md:w-56 bg-gradient-to-r from-[#FAF8F4] dark:from-[#111111] via-[#FAF8F4]/50 dark:via-[#111111]/50 to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#FAF8F4] dark:from-[#111111] to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#FAF8F4] dark:from-[#111111] to-transparent pointer-events-none z-10" />
+
+              {/* Overlay Text Top-Right */}
+              <div className="absolute top-10 right-12 text-right text-[#111111] dark:text-white pointer-events-none drop-shadow-md z-20">
+                <span className="text-[10px] font-mono tracking-[0.25em] uppercase block leading-relaxed opacity-80 font-bold">
+                  MORE THAN<br />A CAR.<br />A STANDARD.
+                </span>
+                <span className="w-8 h-[1px] bg-[#111111] dark:bg-white inline-block mt-2" />
+              </div>
+
+              {/* Slider Pagination on Far Right */}
+              <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-5 text-[11px] font-mono text-[#111111] dark:text-white z-20">
+                <span className="font-bold border-r-2 border-[#111111] dark:border-white pr-2 py-0.5">01 •</span>
+                <span className="opacity-40 hover:opacity-100 cursor-pointer transition-opacity">02</span>
+                <span className="opacity-40 hover:opacity-100 cursor-pointer transition-opacity">03</span>
+                <span className="opacity-40 hover:opacity-100 cursor-pointer transition-opacity">04</span>
+              </div>
+            </div>
           </motion.div>
           
         </div>
       </section>
 
-      {/* 2. BRAND MARQUEE */}
-      <section className="py-12 border-y border-[#111111]/5 bg-white overflow-hidden relative flex items-center">
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
+      {/* 2. BRAND MARQUEE BAR (Matching Dark Footer Bar in Mockup) */}
+      <section className="py-6 px-6 md:px-12 bg-[#0A0A0A] text-white overflow-hidden relative flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/10">
+        <div className="text-xs font-mono tracking-[0.2em] uppercase text-white/60 shrink-0 flex items-center gap-3">
+          <span>TRUSTED BY ENTHUSIASTS</span>
+          <span className="w-12 h-[1px] bg-white/30 hidden sm:inline-block" />
+        </div>
         
         <motion.div 
-          className="flex w-fit"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ ease: "linear", duration: 25, repeat: Infinity }}
+          className="flex items-center gap-12 overflow-x-auto py-2 hide-scrollbar"
         >
-          {duplicatedBrands.map((brand, idx) => (
-            <div key={idx} className="flex items-center gap-12 px-12">
-              <span className="text-2xl md:text-3xl font-heading font-medium text-[#111111]/30 hover:text-[#111111] transition-colors whitespace-nowrap">
-                {brand}
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#111111]/10" />
-            </div>
+          {duplicatedBrands.slice(0, 7).map((brand, idx) => (
+            <span key={idx} className="text-sm font-heading font-semibold tracking-wider text-white/70 hover:text-white transition-colors whitespace-nowrap uppercase">
+              {brand}
+            </span>
           ))}
         </motion.div>
+
+        <div className="text-xs font-mono tracking-[0.2em] uppercase text-white/50 shrink-0 text-right hidden lg:block">
+          QUALITY CARS. LASTING IMPRESSIONS.
+        </div>
       </section>
 
       {/* 3. FEATURED COLLECTIONS (Swiping Carousel) */}
       <ShowroomCarousel />
 
       {/* 4. WHY AUTOHEADS (Timeline) */}
-      <section className="py-32 bg-white relative overflow-hidden">
+      <section className="py-32 bg-white dark:bg-[#111111] relative overflow-hidden transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight mb-6">
-              The AutoHeads <span className="italic text-[#111111]/60">Standard</span>
+            <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight mb-6 text-[#111111] dark:text-white transition-colors">
+              The AutoHeads <span className="italic text-[#111111]/60 dark:text-white/60">Standard</span>
             </h2>
-            <p className="text-lg text-[#111111]/60 max-w-2xl mx-auto font-light">
+            <p className="text-lg text-[#111111]/60 dark:text-white/60 max-w-2xl mx-auto font-light transition-colors">
               We bring radical transparency, unparalleled structural integrity, and concierge-level service to the premium pre-owned automotive market.
             </p>
           </div>
 
           <div className="space-y-12 relative">
             {/* Center Timeline Line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#111111]/10 hidden md:block" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#111111]/10 dark:bg-white/10 hidden md:block" />
 
             {[
               { title: "150-Point Inspection", desc: "Absolute mechanical perfection guaranteed by certified experts.", icon: ShieldCheck, align: "left" },
@@ -169,13 +193,13 @@ export default function Home() {
                 className={`flex flex-col md:flex-row items-center gap-8 md:gap-0 ${feature.align === "right" ? "md:flex-row-reverse" : ""}`}
               >
                 <div className={`flex-1 flex ${feature.align === "right" ? "md:justify-start" : "md:justify-end"} text-center md:text-${feature.align === "right" ? "left" : "right"}`}>
-                  <div className="max-w-sm px-6 bg-[#FAF8F4] p-8 rounded-3xl border border-[#111111]/5 shadow-sm">
-                    <h3 className="text-2xl font-heading font-medium mb-3">{feature.title}</h3>
-                    <p className="text-[#111111]/60 text-sm leading-relaxed">{feature.desc}</p>
+                  <div className="max-w-sm px-6 bg-[#FAF8F4] dark:bg-[#1B1B1B] p-8 rounded-3xl border border-[#111111]/5 dark:border-white/5 shadow-sm transition-colors duration-500">
+                    <h3 className="text-2xl font-heading font-medium mb-3 text-[#111111] dark:text-white transition-colors">{feature.title}</h3>
+                    <p className="text-[#111111]/60 dark:text-white/60 text-sm leading-relaxed transition-colors">{feature.desc}</p>
                   </div>
                 </div>
                 
-                <div className="w-16 h-16 rounded-full bg-white border-4 border-[#FAF8F4] shadow-md flex items-center justify-center z-10 shrink-0 text-[#C8A45D]">
+                <div className="w-16 h-16 rounded-full bg-white dark:bg-[#111111] border-4 border-[#FAF8F4] dark:border-[#1B1B1B] shadow-md flex items-center justify-center z-10 shrink-0 text-[#C8A45D] transition-colors duration-500">
                   <feature.icon size={24} />
                 </div>
                 

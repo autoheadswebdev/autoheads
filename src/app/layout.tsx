@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Inter, Space_Grotesk } from "next/font/google";
+import { Outfit, Inter, Space_Grotesk, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import Navbar from "@/components/Navbar";
@@ -21,6 +21,14 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-serif-luxury",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -76,6 +84,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -99,20 +109,22 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="antialiased bg-brand-white text-brand-graphite selection:bg-brand-graphite selection:text-brand-white flex flex-col min-h-screen">
+    <html lang="en" className={`${outfit.variable} ${inter.variable} ${spaceGrotesk.variable} ${playfair.variable}`} suppressHydrationWarning>
+      <body className="antialiased bg-background text-foreground flex flex-col min-h-screen">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <SmoothScrollProvider>
-          <ScrollProgressBar />
-          <Navbar />
-          <main className="flex-grow pt-24">
-            {children}
-          </main>
-          <Footer />
-        </SmoothScrollProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <SmoothScrollProvider>
+            <ScrollProgressBar />
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </SmoothScrollProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

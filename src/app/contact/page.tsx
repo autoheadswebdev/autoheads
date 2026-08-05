@@ -1,324 +1,458 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { 
-  MapPin, Phone, Mail, MessageCircle, 
-  CheckCircle, ArrowRight, ChevronDown, Clock, 
-  ShieldCheck, Zap, HeadphonesIcon, Copy
+  Phone, Mail, MapPin, MessageSquare, 
+  ShieldCheck, Award, HeadphonesIcon, Clock, 
+  Lock, ChevronDown, ArrowUpRight, ExternalLink,
+  MessageCircle
 } from "lucide-react";
 import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
+import { Button } from "@/components/ui/Button";
 
 export default function ContactPage() {
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
-  const toggleFaq = (index: number) => {
-    if (activeFaq === index) setActiveFaq(null);
-    else setActiveFaq(index);
-  };
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
-
-  const staggerContainer: Variants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-[#111111] overflow-hidden selection:bg-[#C8A45D] selection:text-white pb-24">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div className="bg-[#FAF8F4] dark:bg-[#0B0B0C] text-[#111111] dark:text-white min-h-screen selection:bg-[#C8A45D] selection:text-white transition-colors duration-500 font-sans overflow-x-hidden">
+      
+      {/* 1. HERO SECTION (Matching Reference Mockup 100%) */}
+      <section className="relative w-full min-h-[85vh] pt-16 md:pt-20 lg:pt-22 pb-12 px-6 lg:px-12 flex flex-col justify-between items-center overflow-hidden">
+        <div className="max-w-[1600px] w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 flex-grow">
+          
+          {/* Hero Left (Typography) */}
           <motion.div 
-            variants={staggerContainer}
-            initial="hidden"
-            animate="show"
-            className="flex flex-col space-y-8 z-10"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="lg:col-span-6 flex flex-col space-y-6 md:space-y-8 z-20"
           >
-            <div>
-              <motion.span variants={fadeUp} className="text-xs font-mono tracking-widest text-[#C8A45D] uppercase font-semibold">
-                Get In Touch
-              </motion.span>
-              <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-heading font-medium mt-4 mb-6 leading-tight">
-                Contact Us
-              </motion.h1>
-              <motion.p variants={fadeUp} className="text-[#2B2B2B] text-lg md:text-xl font-light max-w-lg leading-relaxed">
-                Whether you're looking to buy a premium pre-owned vehicle, schedule a test drive, sell your car, or speak with our experts, we're here to provide a seamless and professional experience.
-              </motion.p>
+            <div className="inline-flex items-center gap-3">
+              <span className="w-6 h-[1.5px] bg-[#C8A45D]" />
+              <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-[#111111]/60 dark:text-white/60">
+                WE'RE HERE TO HELP
+              </span>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] font-heading font-extrabold tracking-tight text-[#111111] dark:text-white">
+              DRIVEN <br />
+              BY PASSION <br />
+              <span className="font-serif italic font-normal text-[#111111]/30 dark:text-white/30 block mt-1 tracking-normal">
+                BACKED BY TRUST
+              </span>
+            </h1>
+            
+            <p className="text-sm md:text-base text-[#111111]/70 dark:text-white/70 max-w-lg font-light leading-relaxed">
+              India's premier destination for luxury pre-owned cars, handpicked for those who expect more from every drive.
+            </p>
+            
+            {/* Quick Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <a href="tel:+917034226675">
+                <Button className="rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl">
+                  <Phone size={15} />
+                  CALL US NOW
+                </Button>
+              </a>
+              <span className="text-xs font-mono text-[#111111]/50 dark:text-white/50 uppercase tracking-widest px-2">
+                OR
+              </span>
+              <a href="https://wa.me/917034226675" target="_blank" rel="noreferrer">
+                <Button variant="outline" className="rounded-full border border-[#111111]/20 dark:border-white/20 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 flex items-center gap-3">
+                  <FaWhatsapp size={16} className="text-[#25D366]" />
+                  WHATSAPP US
+                </Button>
+              </a>
             </div>
 
-            <motion.div variants={staggerContainer} className="grid grid-cols-2 gap-4 pt-4">
-              {[
-                { text: "Trusted & Secure", icon: ShieldCheck },
-                { text: "Expert Support", icon: HeadphonesIcon },
-                { text: "Quick Response", icon: Zap },
-                { text: "Customer First", icon: CheckCircle },
-              ].map((badge, idx) => (
-                <motion.div key={idx} variants={fadeUp} className="flex items-center gap-3">
-                  <div className="p-1.5 rounded-full border border-[#C8A45D]/40 bg-white shadow-sm">
-                    <badge.icon size={16} className="text-[#C8A45D]" />
-                  </div>
-                  <span className="text-sm font-medium text-[#2B2B2B]">{badge.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
 
+          {/* Hero Right (Black Mercedes GLS + Building) */}
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative lg:-mr-12 z-0"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="lg:col-span-6 relative h-[420px] md:h-[580px] w-full flex items-center justify-center -mr-6 lg:-mr-12"
           >
-            <motion.div 
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-black/5"
-            >
+            <div className="relative w-full h-full overflow-hidden group rounded-3xl lg:rounded-none">
               <Image 
-                src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=2000&auto=format&fit=crop" 
-                alt="Premium Showroom"
-                fill
-                className="object-cover"
+                src="/contact-hero.png" 
+                alt="Luxury Black Mercedes SUV Showroom" 
+                fill 
+                className="object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-            </motion.div>
+              
+              {/* Soft Edge Blends */}
+              <div className="absolute inset-y-0 left-0 w-28 md:w-44 bg-gradient-to-r from-[#FAF8F4] dark:from-[#0B0B0C] via-[#FAF8F4]/50 dark:via-[#0B0B0C]/50 to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#FAF8F4] dark:from-[#0B0B0C] to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#FAF8F4] dark:from-[#0B0B0C] to-transparent pointer-events-none z-10" />
+
+              {/* Lower Right AH Monogram */}
+              <div className="absolute bottom-8 right-8 z-20 hidden sm:flex items-center justify-center w-16 h-16 rounded-full border border-white/40 bg-black/20 backdrop-blur-md text-white font-heading text-xs font-bold tracking-tighter opacity-80">
+                AH
+              </div>
+            </div>
           </motion.div>
+
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 mt-12">
-        
-        {/* Contact Information Cards (Left Column) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="lg:col-span-5 flex flex-col space-y-8"
-        >
-          <div className="bg-white rounded-3xl p-8 border border-[#E8E8E8] shadow-xl shadow-black/[0.02]">
-            <h2 className="text-2xl font-heading font-medium mb-8">Get In Touch</h2>
-            
-            <div className="space-y-10">
-              {/* Direct Lines */}
-              <div>
-                <h3 className="text-sm font-semibold text-[#2B2B2B] uppercase tracking-wider mb-4 border-b border-[#E8E8E8] pb-2">Direct Lines</h3>
-                <div className="space-y-4">
-                  {[
-                    { label: "WhatsApp", number: "+91 7034 226675", icon: FaWhatsapp, link: "https://wa.me/917034226675", color: "text-[#25D366]" },
-                    { label: "Sales", number: "+91 9072 226675", icon: Phone, link: "tel:+919072226675", color: "text-[#111111]" },
-                    { label: "Service", number: "+91 9539 226675", icon: Phone, link: "tel:+919539226675", color: "text-[#111111]" },
-                  ].map((contact, idx) => (
-                    <div key={idx} className="group flex items-center justify-between p-3 -mx-3 rounded-xl hover:bg-[#FAF9F6] transition-colors">
-                      <a href={contact.link} className="flex items-center gap-4">
-                        <div className={`p-2 rounded-full bg-white shadow-sm border border-[#E8E8E8] group-hover:border-[#C8A45D]/30 transition-colors ${contact.color}`}>
-                          <contact.icon size={18} />
-                        </div>
-                        <div>
-                          <p className="text-xs text-[#2B2B2B] font-medium mb-0.5">{contact.label}</p>
-                          <p className="text-sm font-semibold tracking-wide">{contact.number}</p>
-                        </div>
-                      </a>
-                      <button 
-                        onClick={() => copyToClipboard(contact.number)}
-                        className="p-2 text-[#2B2B2B]/40 hover:text-[#C8A45D] transition-colors"
-                        title="Copy Number"
-                      >
-                        <Copy size={16} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Showroom */}
-              <div>
-                <h3 className="text-sm font-semibold text-[#2B2B2B] uppercase tracking-wider mb-4 border-b border-[#E8E8E8] pb-2">Showroom</h3>
-                <div className="flex gap-4">
-                  <div className="p-2 h-fit rounded-full bg-white shadow-sm border border-[#E8E8E8] text-[#111111]">
-                    <MapPin size={18} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-[#2B2B2B] leading-relaxed mb-4">
-                      SH-69, Panthavoor, Changaramkulam<br />
-                      Alamkode P.O., Malappuram Dt,<br />
-                      Kerala Pin : 679585
-                    </p>
-                    <a href="https://www.google.com/maps?daddr=SH-69,+Panthavoor+Palam,+Changaramkulam,+Alamcode,+Kerala+679585" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C8A45D] hover:text-[#111111] transition-colors group">
-                      Get Directions <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Digital */}
-              <div>
-                <h3 className="text-sm font-semibold text-[#2B2B2B] uppercase tracking-wider mb-4 border-b border-[#E8E8E8] pb-2">Digital</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <a href="mailto:autoheadsautomotive@gmail.com" className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#FAF9F6] border border-transparent hover:border-[#E8E8E8] transition-all group">
-                    <Mail size={18} className="text-[#2B2B2B] group-hover:text-[#C8A45D] transition-colors" />
-                    <span className="text-sm font-medium truncate">Email</span>
-                  </a>
-                  <a href="https://instagram.com/autoheads_automotive" target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#FAF9F6] border border-transparent hover:border-[#E8E8E8] transition-all group">
-                    <FaInstagram size={18} className="text-[#2B2B2B] group-hover:text-[#E1306C] transition-colors" />
-                    <span className="text-sm font-medium truncate">Instagram</span>
-                  </a>
-                  <a href="https://facebook.com/autoheadsautomotive" target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#FAF9F6] border border-transparent hover:border-[#E8E8E8] transition-all group">
-                    <FaFacebook size={18} className="text-[#2B2B2B] group-hover:text-[#1877F2] transition-colors" />
-                    <span className="text-sm font-medium truncate">Facebook</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Map & Form (Right Column) */}
-        <div className="lg:col-span-7 flex flex-col space-y-8">
+      {/* 2. SPLIT CONTACT CONSOLE (Matching Reference Mockup 100%) */}
+      <section className="py-12 px-6 lg:px-12 max-w-[1600px] mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Map */}
+          {/* Left Dark Card - Multiple Ways to Reach Us */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            id="map"
-            className="w-full h-[300px] bg-white rounded-3xl border border-[#E8E8E8] shadow-xl shadow-black/[0.02] overflow-hidden relative group"
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-4 bg-[#141416] text-white p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between"
           >
-            <div className="absolute top-4 left-4 z-10">
+            <div>
+              <span className="text-[10px] font-mono tracking-[0.25em] uppercase font-semibold text-[#C8A45D] block mb-2">
+                GET IN TOUCH
+              </span>
+              <h2 className="text-2xl md:text-3xl font-heading font-serif font-medium mb-8 text-white">
+                Multiple Ways to Reach Us
+              </h2>
+
+              <div className="space-y-6">
+                {/* Official Phone Lines */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-[#C8A45D]/40 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#C8A45D]/10 border border-[#C8A45D]/30 flex items-center justify-center text-[#C8A45D] shrink-0 mt-1">
+                    <Phone size={18} />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono tracking-widest text-[#C8A45D] uppercase block font-semibold">DIRECT PHONE LINES</span>
+                    <div className="space-y-1 mt-1">
+                      <a href="tel:+917034226675" className="text-sm font-bold text-white hover:text-[#C8A45D] transition-colors block">
+                        +91 7034 226675
+                      </a>
+                      <a href="tel:+919072226675" className="text-sm font-bold text-white hover:text-[#C8A45D] transition-colors block">
+                        +91 9072 226675
+                      </a>
+                      <a href="tel:+919539226675" className="text-sm font-bold text-white hover:text-[#C8A45D] transition-colors block">
+                        +91 9539 226675
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* WhatsApp */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-[#C8A45D]/40 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] shrink-0 mt-1">
+                    <FaWhatsapp size={18} />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono tracking-widest text-[#C8A45D] uppercase block font-semibold">WHATSAPP</span>
+                    <a href="https://wa.me/917034226675" target="_blank" rel="noreferrer" className="text-sm font-bold text-white hover:text-[#C8A45D] transition-colors block mt-0.5">
+                      +91 7034 226675
+                    </a>
+                    <span className="text-[11px] text-white/50 font-light block mt-1">Chat directly with our team</span>
+                  </div>
+                </div>
+
+                {/* Official Email */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-[#C8A45D]/40 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#C8A45D]/10 border border-[#C8A45D]/30 flex items-center justify-center text-[#C8A45D] shrink-0 mt-1">
+                    <Mail size={18} />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono tracking-widest text-[#C8A45D] uppercase block font-semibold">EMAIL</span>
+                    <a href="mailto:autoheadsautomotive@gmail.com" className="text-sm font-bold text-white hover:text-[#C8A45D] transition-colors block mt-0.5">
+                      autoheadsautomotive@gmail.com
+                    </a>
+                    <span className="text-[11px] text-white/50 font-light block mt-1">We'll reply within 24 hours</span>
+                  </div>
+                </div>
+
+                {/* Showroom Address */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-[#C8A45D]/40 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#C8A45D]/10 border border-[#C8A45D]/30 flex items-center justify-center text-[#C8A45D] shrink-0 mt-1">
+                    <MapPin size={18} />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono tracking-widest text-[#C8A45D] uppercase block font-semibold">SHOWROOM ADDRESS</span>
+                    <p className="text-xs font-medium text-white leading-relaxed mt-0.5">
+                      SH-69, Panthavoor, Changaramkulam,<br />
+                      Alamkode P.O., Malappuram Dt,<br />
+                      Kerala Pin : 679585
+                    </p>
+                    <a href="#map" className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#C8A45D] hover:underline mt-2">
+                      <span>View on Google Maps</span>
+                      <ExternalLink size={12} />
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Dark Card - We'll Get Back to You Form */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="lg:col-span-8 bg-[#141416] text-white p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between"
+          >
+            <div>
+              <span className="text-[10px] font-mono tracking-[0.25em] uppercase font-semibold text-[#C8A45D] block mb-2">
+                SEND US A MESSAGE
+              </span>
+              <h2 className="text-2xl md:text-3xl font-heading font-serif font-medium mb-8 text-white">
+                We'll Get Back to You
+              </h2>
+
+              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <input 
+                      type="text" 
+                      placeholder="Full Name" 
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                      className="w-full bg-[#1C1C1E] border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#C8A45D] transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <input 
+                      type="tel" 
+                      placeholder="Phone Number" 
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className="w-full bg-[#1C1C1E] border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#C8A45D] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-[#1C1C1E] border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#C8A45D] transition-colors"
+                  />
+                </div>
+
+                <div className="relative">
+                  <select 
+                    value={formData.subject}
+                    onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                    className="w-full appearance-none bg-[#1C1C1E] border border-white/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer"
+                  >
+                    <option value="" className="bg-[#1C1C1E]">Subject</option>
+                    <option value="buy" className="bg-[#1C1C1E]">Buy a Pre-Owned Car</option>
+                    <option value="sell" className="bg-[#1C1C1E]">Sell / Trade Your Car</option>
+                    <option value="test_drive" className="bg-[#1C1C1E]">Schedule Test Drive</option>
+                    <option value="general" className="bg-[#1C1C1E]">General Inquiry</option>
+                  </select>
+                  <ChevronDown size={16} className="absolute right-5 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
+                </div>
+
+                <div>
+                  <textarea 
+                    rows={4} 
+                    placeholder="Your Message" 
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    className="w-full bg-[#1C1C1E] border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#C8A45D] transition-colors resize-none"
+                  />
+                </div>
+
+                <div>
+                  <button 
+                    type="submit" 
+                    className="w-full bg-[#C8A45D] hover:bg-[#b8944d] text-black font-semibold uppercase tracking-[0.18em] text-xs py-5 rounded-xl transition-all shadow-xl flex items-center justify-center gap-2 group"
+                  >
+                    <span>SEND MESSAGE</span>
+                    <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-center gap-2 text-center text-xs text-white/50 pt-2 font-light">
+                  <Lock size={13} className="text-[#C8A45D]" />
+                  <span>Your information is safe with us. We respect your privacy.</span>
+                </div>
+
+              </form>
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* 3. 5-COLUMN PROMISE & TRUST STRIP */}
+      <section className="py-12 px-6 lg:px-12 max-w-[1600px] mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 divide-y md:divide-y-0 md:divide-x divide-[#111111]/10 dark:divide-white/10">
+          
+          {/* Item 1 */}
+          <div className="flex items-center gap-4 px-3 pt-4 md:pt-0">
+            <div className="w-12 h-12 rounded-2xl border border-[#C8A45D]/40 bg-[#C8A45D]/10 text-[#C8A45D] flex items-center justify-center shrink-0">
+              <ShieldCheck size={22} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider font-heading text-[#111111] dark:text-white mb-0.5">
+                100% TRUSTED
+              </h4>
+              <p className="text-xs text-[#111111]/60 dark:text-white/60 font-light leading-snug">
+                Transparent & Secure Process
+              </p>
+            </div>
+          </div>
+
+          {/* Item 2 */}
+          <div className="flex items-center gap-4 px-3 pt-4 md:pt-0">
+            <div className="w-12 h-12 rounded-2xl border border-[#C8A45D]/40 bg-[#C8A45D]/10 text-[#C8A45D] flex items-center justify-center shrink-0">
+              <Award size={22} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider font-heading text-[#111111] dark:text-white mb-0.5">
+                BEST VALUE
+              </h4>
+              <p className="text-xs text-[#111111]/60 dark:text-white/60 font-light leading-snug">
+                Get the best value for your car
+              </p>
+            </div>
+          </div>
+
+          {/* Item 3 */}
+          <div className="flex items-center gap-4 px-3 pt-4 md:pt-0">
+            <div className="w-12 h-12 rounded-2xl border border-[#C8A45D]/40 bg-[#C8A45D]/10 text-[#C8A45D] flex items-center justify-center shrink-0">
+              <HeadphonesIcon size={22} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider font-heading text-[#111111] dark:text-white mb-0.5">
+                EXPERT SUPPORT
+              </h4>
+              <p className="text-xs text-[#111111]/60 dark:text-white/60 font-light leading-snug">
+                Our experts are here to assist you
+              </p>
+            </div>
+          </div>
+
+          {/* Item 4 */}
+          <div className="flex items-center gap-4 px-3 pt-4 md:pt-0">
+            <div className="w-12 h-12 rounded-2xl border border-[#C8A45D]/40 bg-[#C8A45D]/10 text-[#C8A45D] flex items-center justify-center shrink-0">
+              <Clock size={22} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider font-heading text-[#111111] dark:text-white mb-0.5">
+                QUICK RESPONSE
+              </h4>
+              <p className="text-xs text-[#111111]/60 dark:text-white/60 font-light leading-snug">
+                We respond within 24 hours
+              </p>
+            </div>
+          </div>
+
+          {/* Item 5 */}
+          <div className="flex items-center gap-4 px-3 pt-4 md:pt-0">
+            <div className="w-12 h-12 rounded-2xl border border-[#C8A45D]/40 bg-[#C8A45D]/10 text-[#C8A45D] flex items-center justify-center shrink-0">
+              <Lock size={22} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider font-heading text-[#111111] dark:text-white mb-0.5">
+                NO HIDDEN CHARGES
+              </h4>
+              <p className="text-xs text-[#111111]/60 dark:text-white/60 font-light leading-snug">
+                What we quote is what you get
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. SHOWROOM LOCATION & GOOGLE MAPS SECTION */}
+      <section className="py-12 px-6 lg:px-12 max-w-[1600px] mx-auto w-full" id="map">
+        <div className="bg-[#EFECE6] dark:bg-[#141416] rounded-3xl p-8 md:p-12 border border-[#111111]/10 dark:border-white/10 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Text Column */}
+          <div className="lg:col-span-4 flex flex-col justify-center space-y-6">
+            <span className="text-[10px] font-mono tracking-[0.25em] uppercase font-semibold text-[#C8A45D]">
+              OUR LOCATION
+            </span>
+            <h2 className="text-3xl md:text-4xl font-heading font-serif font-medium text-[#111111] dark:text-white">
+              Visit Our Showroom
+            </h2>
+            <p className="text-sm text-[#111111]/70 dark:text-white/70 font-light leading-relaxed max-w-sm">
+              Experience our luxury collection in person at our Panthavoor, Changaramkulam showroom.
+            </p>
+            <a 
+              href="https://www.google.com/maps?daddr=SH-69,+Panthavoor+Palam,+Changaramkulam,+Alamcode,+Kerala+679585" 
+              target="_blank" 
+              rel="noreferrer"
+            >
+              <Button className="rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-8 py-5 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 inline-flex items-center gap-3 shadow-lg">
+                GET DIRECTIONS
+                <ArrowUpRight size={15} />
+              </Button>
+            </a>
+          </div>
+
+          {/* Right Map Canvas Column (Panthavoor, Changaramkulam) */}
+          <div className="lg:col-span-8 relative h-[360px] md:h-[440px] w-full rounded-2xl overflow-hidden border border-[#111111]/10 dark:border-white/10 shadow-2xl group bg-[#111]">
+            
+            {/* High-Definition Luxury Map Graphic Background */}
+            <Image 
+              src="/showroom-map.png" 
+              alt="AutoHeads Showroom Panthavoor Location Map" 
+              fill 
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out brightness-95 dark:brightness-90"
+              priority
+            />
+            
+            {/* Soft Edge Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
+            {/* Custom Showroom Location Pin Badge */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center pointer-events-none">
+              <div className="bg-[#111111]/95 text-white px-5 py-2.5 rounded-2xl border border-[#C8A45D]/60 shadow-2xl flex items-center gap-3 backdrop-blur-md animate-bounce">
+                <div className="w-9 h-9 rounded-full bg-[#C8A45D] text-black font-bold text-xs flex items-center justify-center font-heading shadow-md">
+                  AH
+                </div>
+                <div className="text-left">
+                  <div className="text-xs font-bold text-white font-heading">AutoHeads Showroom</div>
+                  <div className="text-[10px] text-[#C8A45D] font-mono">SH-69, Panthavoor, Changaramkulam</div>
+                </div>
+              </div>
+              <div className="w-3.5 h-3.5 bg-[#C8A45D] rotate-45 -mt-2 shadow-lg" />
+            </div>
+
+            {/* Bottom Floating Google Maps Direct Action Bar */}
+            <div className="absolute bottom-5 right-5 left-5 z-20 flex flex-wrap justify-between items-center gap-4">
+              <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-white text-xs font-mono hidden sm:block">
+                📍 10.7620° N, 75.9850° E
+              </div>
               <a 
                 href="https://www.google.com/maps?daddr=SH-69,+Panthavoor+Palam,+Changaramkulam,+Alamcode,+Kerala+679585" 
                 target="_blank" 
                 rel="noreferrer"
-                className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider border border-[#E8E8E8] shadow-sm hover:bg-[#C8A45D] hover:text-white hover:border-[#C8A45D] transition-all duration-300"
+                className="bg-[#C8A45D] hover:bg-[#b8944d] text-black text-xs font-semibold uppercase tracking-wider px-6 py-3.5 rounded-xl backdrop-blur-md shadow-2xl transition-all flex items-center gap-2 font-heading"
               >
-                Open in Google Maps
+                <span>OPEN IN GOOGLE MAPS</span>
+                <ExternalLink size={15} />
               </a>
             </div>
-            <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700">
-              <iframe 
-                src="https://maps.google.com/maps?q=Autoheads+Automotive,+SH-69,+Panthavoor+Palam,+Changaramkulam,+Alamcode,+Kerala+679585&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                className="w-full h-full grayscale-[50%] contrast-100 opacity-90" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-              />
-            </div>
-          </motion.div>
 
-          {/* Contact Form */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-3xl p-8 border border-[#E8E8E8] shadow-xl shadow-black/[0.02]"
-          >
-            <h2 className="text-2xl font-heading font-medium mb-8">Send Us A Message</h2>
-            
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="relative group">
-                  <input type="text" id="name" placeholder=" " className="peer w-full bg-transparent border-b-2 border-[#E8E8E8] px-0 py-3 text-[#111111] placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" />
-                  <label htmlFor="name" className="absolute left-0 top-3 text-[#2B2B2B]/60 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#C8A45D]">Full Name</label>
-                </div>
-                <div className="relative group">
-                  <input type="email" id="email" placeholder=" " className="peer w-full bg-transparent border-b-2 border-[#E8E8E8] px-0 py-3 text-[#111111] placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" />
-                  <label htmlFor="email" className="absolute left-0 top-3 text-[#2B2B2B]/60 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#C8A45D]">Email Address</label>
-                </div>
-              </div>
+          </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="relative group">
-                  <input type="tel" id="phone" placeholder=" " className="peer w-full bg-transparent border-b-2 border-[#E8E8E8] px-0 py-3 text-[#111111] placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" />
-                  <label htmlFor="phone" className="absolute left-0 top-3 text-[#2B2B2B]/60 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#C8A45D]">Phone Number</label>
-                </div>
-                <div className="relative group">
-                  <select id="reason" defaultValue="" className="peer w-full bg-transparent border-b-2 border-[#E8E8E8] px-0 py-3 text-[#111111] focus:outline-none focus:border-[#C8A45D] transition-colors appearance-none cursor-pointer">
-                    <option value="" disabled hidden></option>
-                    <option value="buy">Buy a Car</option>
-                    <option value="sell">Sell a Car</option>
-                    <option value="finance">Finance</option>
-                    <option value="insurance">Insurance</option>
-                    <option value="test_drive">Test Drive</option>
-                    <option value="general">General Inquiry</option>
-                  </select>
-                  <label htmlFor="reason" className="absolute left-0 -top-3 text-[#C8A45D] text-xs transition-all">Reason for Contact</label>
-                  <ChevronDown className="absolute right-0 top-4 text-[#2B2B2B]/60 pointer-events-none" size={16} />
-                </div>
-              </div>
-
-              <div className="relative group">
-                <textarea id="message" rows={4} placeholder=" " className="peer w-full bg-transparent border-b-2 border-[#E8E8E8] px-0 py-3 text-[#111111] placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors resize-none"></textarea>
-                <label htmlFor="message" className="absolute left-0 top-3 text-[#2B2B2B]/60 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#C8A45D]">Your Message</label>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button type="submit" className="flex-1 bg-[#111111] text-white py-4 px-8 rounded-full font-semibold uppercase tracking-wider text-xs hover:bg-[#C8A45D] transition-colors duration-300">
-                  Send Message
-                </button>
-                <a href="tel:+919072226675" className="flex-1 text-center bg-white border border-[#E8E8E8] text-[#111111] py-4 px-8 rounded-full font-semibold uppercase tracking-wider text-xs hover:border-[#111111] transition-colors duration-300">
-                  Call Now
-                </a>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Feature Strip */}
-      <section className="max-w-7xl mx-auto px-6 mt-20 mb-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { title: "Working Hours", desc: "Mon-Sat, 9 AM – 7 PM", icon: Clock },
-            { title: "Test Drive", desc: "Book instantly online", icon: ShieldCheck },
-            { title: "Free Valuation", desc: "Get vehicle evaluation", icon: Zap },
-            { title: "Customer Support", desc: "24/7 Assistance available", icon: HeadphonesIcon },
-          ].map((feature, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white p-6 rounded-2xl border border-[#E8E8E8] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
-            >
-              <div className="mb-4 text-[#C8A45D] group-hover:scale-110 transition-transform duration-300 origin-left">
-                <feature.icon size={28} strokeWidth={1.5} />
-              </div>
-              <h4 className="font-heading font-medium text-lg mb-1">{feature.title}</h4>
-              <p className="text-[#2B2B2B] text-sm">{feature.desc}</p>
-            </motion.div>
-          ))}
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="max-w-3xl mx-auto px-6 text-center mt-24 mb-8">
-        <h2 className="text-3xl font-heading font-medium mb-4">Stay Connected</h2>
-        <p className="text-[#2B2B2B] mb-8">Subscribe for the latest arrivals, luxury offers, and industry updates.</p>
-        <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto" onSubmit={(e) => e.preventDefault()}>
-          <input 
-            type="email" 
-            placeholder="Enter your email address" 
-            className="flex-1 bg-white border border-[#E8E8E8] rounded-full px-6 py-4 focus:outline-none focus:border-[#C8A45D] transition-colors"
-            required
-          />
-          <button type="submit" className="bg-[#C8A45D] text-white px-8 py-4 rounded-full font-semibold uppercase tracking-wider text-xs hover:bg-[#b08f4c] transition-colors">
-            Subscribe
-          </button>
-        </form>
-      </section>
     </div>
   );
 }
