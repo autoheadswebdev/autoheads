@@ -25,7 +25,7 @@ export default function CarCard({
   car: CarProps;
   view?: "grid" | "list";
 }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+
 
   if (view === "list") {
     return (
@@ -116,21 +116,7 @@ export default function CarCard({
             <div />
           )}
 
-          {/* Favorite Heart Control */}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsFavorite(!isFavorite);
-            }}
-            className={`w-9 h-9 rounded-full backdrop-blur-md border flex items-center justify-center transition-all ${
-              isFavorite 
-                ? "bg-[#C8A45D] border-[#C8A45D] text-black" 
-                : "bg-black/30 border-white/20 text-white hover:bg-white hover:text-black"
-            }`}
-            aria-label="Add to favorites"
-          >
-            <Heart size={16} className={isFavorite ? "fill-current" : ""} />
-          </button>
+
         </div>        {/* Bottom Card Content */}
         <div className="relative z-10 p-6 flex flex-col justify-end">
           <div className="text-[#C8A45D] font-mono text-xs tracking-widest uppercase mb-1 font-bold">

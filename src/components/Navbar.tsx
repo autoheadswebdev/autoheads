@@ -20,9 +20,8 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Inventory", href: "/inventory" },
-    { name: "Sell Your Car", href: "/sell" },
     { name: "About", href: "/about" },
+    { name: "Sell Your Car", href: "/sell" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -71,7 +70,7 @@ export default function Navbar() {
                 href="/inventory"
                 className="inline-flex items-center gap-1.5 text-xs tracking-wider uppercase font-semibold text-[#111111] dark:text-white bg-[#111111]/5 dark:bg-white/10 hover:bg-[#111111] dark:hover:bg-white hover:text-white dark:hover:text-[#111111] px-4 py-2 rounded-full border border-[#111111]/10 dark:border-white/15 transition-all duration-300 group"
               >
-                <span>Explore</span>
+                <span>Inventory</span>
                 <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
@@ -125,7 +124,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-center py-4 rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] text-xs tracking-widest uppercase font-semibold"
               >
-                Explore Collection
+                Inventory
               </Link>
               <div className="text-[10px] font-mono tracking-widest text-[#111111]/40 dark:text-white/40 text-center uppercase">
                 AutoHeads • Luxury Automobiles

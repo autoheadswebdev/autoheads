@@ -20,7 +20,20 @@ export default function Home() {
   };
 
   // Brands for marquee
-  const brands = ["Mercedes-Benz", "BMW", "Audi", "Porsche", "Toyota", "Ford", "Suzuki", "Nissan", "Honda", "Volkswagen", "Jaguar", "Land Rover"];
+  const brands = [
+    { name: "Mercedes-Benz", logo: "/logos/mercedes.svg" },
+    { name: "BMW", logo: "/logos/bmw.svg" },
+    { name: "Audi", logo: "/logos/audi.svg" },
+    { name: "Porsche", logo: "/logos/porsche.svg" },
+    { name: "Toyota", logo: "/logos/toyota.svg" },
+    { name: "Ford", logo: "/logos/ford.svg" },
+    { name: "Suzuki", logo: "/logos/suzuki.svg" },
+    { name: "Nissan", logo: "/logos/nissan.svg" },
+    { name: "Honda", logo: "/logos/honda.svg" },
+    { name: "Volkswagen", logo: "/logos/volkswagen.svg" },
+    { name: "Jaguar", logo: "/logos/jaguar.svg" },
+    { name: "Land Rover", logo: "/logos/landrover.svg" }
+  ];
   const duplicatedBrands = [...brands, ...brands];
 
   return (
@@ -57,13 +70,13 @@ export default function Home() {
             
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link href="/inventory">
-                <Button className="rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl">
+                <Button className="rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-8 py-4 text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl">
                   EXPLORE INVENTORY
                   <ArrowRight className="group-hover:translate-x-1 transition-transform" size={16} />
                 </Button>
               </Link>
               <Link href="/sell">
-                <Button variant="outline" className="rounded-full border border-[#111111]/30 dark:border-white/30 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300">
+                <Button variant="outline" className="rounded-full border border-[#111111]/30 dark:border-white/30 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-8 py-4 text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300">
                   SELL YOUR CAR
                 </Button>
               </Link>
@@ -124,13 +137,7 @@ export default function Home() {
                 <span className="w-8 h-[1px] bg-[#111111] dark:bg-white inline-block mt-2" />
               </div>
 
-              {/* Slider Pagination on Far Right */}
-              <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-5 text-[11px] font-mono text-[#111111] dark:text-white z-20">
-                <span className="font-bold border-r-2 border-[#111111] dark:border-white pr-2 py-0.5">01 •</span>
-                <span className="opacity-40 hover:opacity-100 cursor-pointer transition-opacity">02</span>
-                <span className="opacity-40 hover:opacity-100 cursor-pointer transition-opacity">03</span>
-                <span className="opacity-40 hover:opacity-100 cursor-pointer transition-opacity">04</span>
-              </div>
+
             </div>
           </motion.div>
           
@@ -144,19 +151,25 @@ export default function Home() {
           <span className="w-12 h-[1px] bg-white/30 hidden sm:inline-block" />
         </div>
         
-        <motion.div 
-          className="flex items-center gap-12 overflow-x-auto py-2 hide-scrollbar"
-        >
-          {duplicatedBrands.slice(0, 7).map((brand, idx) => (
-            <span key={idx} className="text-sm font-heading font-semibold tracking-wider text-white/70 hover:text-white transition-colors whitespace-nowrap uppercase">
-              {brand}
-            </span>
-          ))}
-        </motion.div>
-
-        <div className="text-xs font-mono tracking-[0.2em] uppercase text-white/50 shrink-0 text-right hidden lg:block">
-          QUALITY CARS. LASTING IMPRESSIONS.
+        <div className="flex-1 overflow-hidden">
+          <motion.div 
+            className="flex items-center gap-12 py-2 w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
+          >
+            {duplicatedBrands.map((brand, idx) => (
+              <div key={idx} className="flex items-center justify-center shrink-0 w-24">
+                {/* Using img instead of next/image to bypass domain config for external CDNs */}
+                <img 
+                  src={brand.logo} 
+                  alt={brand.name} 
+                  className="max-h-8 max-w-full object-contain opacity-50 hover:opacity-100 invert brightness-0 transition-opacity duration-300"
+                />
+              </div>
+            ))}
+          </motion.div>
         </div>
+
       </section>
 
       {/* 3. FEATURED COLLECTIONS (Swiping Carousel) */}
@@ -212,33 +225,7 @@ export default function Home() {
 
 
 
-      {/* 7. SELL YOUR CAR CTA (Dark Overlay) */}
-      <section className="relative py-40 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=2000&auto=format&fit=crop"
-            alt="Sell Your Car"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
-        </div>
-        
-        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto text-white">
-          <h2 className="text-5xl md:text-7xl font-heading font-medium tracking-tight mb-6">
-            Upgrade Your <br/>
-            <span className="italic text-white/70">Journey</span>
-          </h2>
-          <p className="text-lg text-white/70 font-light mb-12 max-w-xl mx-auto">
-            Get a premium valuation for your luxury vehicle. Experience a seamless, transparent selling process.
-          </p>
-          <Link href="/sell">
-            <Button className="bg-[#C8A45D] text-white hover:bg-white hover:text-[#111111] rounded-full px-10 py-7 text-sm uppercase tracking-[0.15em] font-semibold transition-all duration-300">
-              Connect Now
-            </Button>
-          </Link>
-        </div>
-      </section>
+
 
 
 

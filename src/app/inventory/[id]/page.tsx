@@ -61,7 +61,7 @@ export default function CarDetailsPage() {
 
   return (
     <div className="bg-brand-soft min-h-screen pb-24">
-      <div className="container mx-auto px-4 md:px-8 pt-8">
+      <div className="container mx-auto px-4 md:px-8 pt-28">
         
         {/* Back Button */}
         <Link href="/inventory" className="inline-flex items-center gap-2 text-brand-silver hover:text-brand-graphite mb-8 transition-colors font-medium">
@@ -190,10 +190,7 @@ export default function CarDetailsPage() {
                   <span className="font-semibold text-brand-graphite">{car.specs.registrationYear}</span>
                 </div>
 
-                <div className="flex flex-col border-b border-brand-border pb-3 md:border-none">
-                  <span className="text-sm text-brand-silver mb-1">Road Tax</span>
-                  <span className="font-semibold text-brand-graphite">{car.specs.roadTax}</span>
-                </div>
+
 
               </div>
             </div>

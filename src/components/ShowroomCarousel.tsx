@@ -58,7 +58,7 @@ export default function ShowroomCarousel() {
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-[#111111]/10 dark:border-white/10 pb-8 transition-colors duration-500">
         <div>
           <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight text-[#111111] dark:text-white transition-colors duration-500">
-            Featured <span className="italic text-[#111111]/60 dark:text-white/60">Collections</span>
+            Coming <span className="italic text-[#111111]/60 dark:text-white/60">Soon</span>
           </h2>
         </div>
         <Link href="/inventory" className="text-[#111111] dark:text-white text-sm font-semibold uppercase tracking-widest hover:text-[#C8A45D] dark:hover:text-[#C8A45D] transition-colors flex items-center gap-2 group">
