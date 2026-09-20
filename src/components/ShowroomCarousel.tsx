@@ -54,7 +54,7 @@ export default function ShowroomCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full relative py-32 overflow-hidden">
+    <div className="w-full relative pt-24 pb-8 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-[#111111]/10 dark:border-white/10 pb-8 transition-colors duration-500">
         <div>
           <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight text-[#111111] dark:text-white transition-colors duration-500">
@@ -133,15 +133,7 @@ export default function ShowroomCarousel() {
                     </h3>
                   </div>
                   
-                  <div className="flex flex-col md:items-end mt-4 md:mt-0">
-                    <span className="text-xl md:text-2xl font-body font-medium text-[#111111] dark:text-white transition-colors duration-500">
-                      {car.priceText.split(" kr.")[0]} kr.
-                    </span>
-                    <span className="text-xs text-[#111111]/60 dark:text-white/60 transition-colors duration-500">
-                      pr. md.
-                    </span>
-                  </div>
-                  
+
                   <Link href={`/inventory/${car.id}`} className="mt-4 md:mt-0">
                     <Button variant="outline" className="rounded-full px-8 py-2 text-xs font-semibold uppercase tracking-wider border-[#111111]/20 dark:border-white/20 text-[#111111] dark:text-white hover:bg-[#111111] dark:hover:bg-white hover:text-white dark:hover:text-[#111111] transition-colors duration-300">
                       DETAILS

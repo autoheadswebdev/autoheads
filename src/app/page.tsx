@@ -69,14 +69,14 @@ export default function Home() {
             </p>
             
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link href="/inventory">
-                <Button className="rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-8 py-4 text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl">
-                  EXPLORE INVENTORY
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={16} />
+              <Link href="/inventory" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-6 md:px-8 py-6 md:py-4 text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl whitespace-nowrap">
+                  <span>EXPLORE INVENTORY</span>
+                  <ArrowRight className="group-hover:translate-x-1 transition-transform shrink-0" size={16} />
                 </Button>
               </Link>
-              <Link href="/sell">
-                <Button variant="outline" className="rounded-full border border-[#111111]/30 dark:border-white/30 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-8 py-4 text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300">
+              <Link href="/sell" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto rounded-full border border-[#111111]/30 dark:border-white/30 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-6 md:px-8 py-6 md:py-4 text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-300 whitespace-nowrap">
                   SELL YOUR CAR
                 </Button>
               </Link>
@@ -113,31 +113,32 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="lg:col-span-7 relative h-[480px] md:h-[640px] w-full flex items-center justify-center -mr-6 lg:-mr-12"
+            className="absolute inset-0 z-0 lg:static lg:relative lg:col-span-7 h-full lg:h-[480px] xl:h-[640px] w-full flex items-center justify-center lg:-mr-12"
           >
             <div className="relative w-full h-full overflow-hidden group">
               <Image 
                 src="/hero-bg.png" 
                 alt="Luxury White BMW M5 in Architectural Arch" 
                 fill 
-                className="object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
+                className="object-cover object-center lg:scale-105 lg:group-hover:scale-100 transition-transform duration-1000 ease-out"
                 priority
               />
               
+              {/* Mobile overlay for text legibility */}
+              <div className="absolute inset-0 bg-[#FAF8F4]/40 dark:bg-[#111111]/60 lg:hidden z-10" />
+
               {/* Soft Seamless Gradient Blends */}
-              <div className="absolute inset-y-0 left-0 w-32 md:w-56 bg-gradient-to-r from-[#FAF8F4] dark:from-[#111111] via-[#FAF8F4]/50 dark:via-[#111111]/50 to-transparent pointer-events-none z-10" />
-              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#FAF8F4] dark:from-[#111111] to-transparent pointer-events-none z-10" />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#FAF8F4] dark:from-[#111111] to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-y-0 left-0 w-32 md:w-56 bg-gradient-to-r from-[#FAF8F4] dark:from-[#111111] via-[#FAF8F4]/50 dark:via-[#111111]/50 to-transparent pointer-events-none z-10 hidden lg:block" />
+              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#FAF8F4] dark:from-[#111111] to-transparent pointer-events-none z-10 hidden lg:block" />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#FAF8F4] dark:from-[#111111] to-transparent pointer-events-none z-10 hidden lg:block" />
 
               {/* Overlay Text Top-Right */}
-              <div className="absolute top-10 right-12 text-right text-[#111111] dark:text-white pointer-events-none drop-shadow-md z-20">
+              <div className="absolute top-10 right-12 text-right text-[#111111] dark:text-white pointer-events-none drop-shadow-md z-20 hidden lg:block">
                 <span className="text-[10px] font-mono tracking-[0.25em] uppercase block leading-relaxed opacity-80 font-bold">
                   MORE THAN<br />A CAR.<br />A STANDARD.
                 </span>
                 <span className="w-8 h-[1px] bg-[#111111] dark:bg-white inline-block mt-2" />
               </div>
-
-
             </div>
           </motion.div>
           
@@ -176,7 +177,7 @@ export default function Home() {
       <ShowroomCarousel />
 
       {/* 4. WHY AUTOHEADS (Timeline) */}
-      <section className="py-32 bg-white dark:bg-[#111111] relative overflow-hidden transition-colors duration-500">
+      <section className="pt-16 pb-32 bg-white dark:bg-[#111111] relative overflow-hidden transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight mb-6 text-[#111111] dark:text-white transition-colors">
