@@ -14,6 +14,7 @@ export default async function Home() {
   const { data: cars } = await supabase
     .from('vehicles')
     .select('*')
+    .eq('status', 'Arriving Soon')
     .order('created_at', { ascending: false })
     .limit(10);
 
