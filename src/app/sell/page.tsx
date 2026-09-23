@@ -39,7 +39,8 @@ export default function SellCarPage() {
     setSubmitStatus("idle");
     setErrorMessage("");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     
     // Append files from state to formData
     mediaFiles.forEach(file => {
@@ -50,7 +51,7 @@ export default function SellCarPage() {
 
     if (result.success) {
       setSubmitStatus("success");
-      e.currentTarget.reset();
+      form.reset();
       setMediaFiles([]);
     } else {
       setSubmitStatus("error");
