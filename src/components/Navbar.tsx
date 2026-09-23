@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -10,6 +11,7 @@ import { ThemeToggle } from "./ThemeToggle";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +26,8 @@ export default function Navbar() {
     { name: "Sell Your Car", href: "/sell" },
     { name: "Contact", href: "/contact" },
   ];
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>
@@ -41,7 +45,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center group h-10 md:h-12 relative">
               <div className="relative w-40 md:w-52 lg:w-56 h-full flex items-center mix-blend-multiply dark:mix-blend-screen dark:invert transition-all origin-left">
                 <Image 
-                  src="/logo.png" 
+                  src="/autoheads-logo-transparent.png" 
                   alt="AutoHeads Automotive Experts" 
                   fill 
                   className="object-contain object-left" 

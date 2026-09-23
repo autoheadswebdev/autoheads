@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.43.0",
@@ -21,6 +23,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-icons": "^5.7.0",
+    "sharp": "^0.35.4",
     "simple-icons": "^16.31.0",
     "swiper": "^14.0.7",
     "tailwind-merge": "^3.6.0"

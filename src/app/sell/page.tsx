@@ -24,9 +24,40 @@ import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import React, { useState } from "react";
 import PremiumUploader from "@/components/PremiumUploader";
+import { submitSellRequest } from "./actions";
 
 export default function SellCarPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [mediaFiles, setMediaFiles] = useState<File[]>([]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage("");
+
+    const formData = new FormData(e.currentTarget);
+    
+    // Append files from state to formData
+    mediaFiles.forEach(file => {
+      formData.append("media_files", file);
+    });
+
+    const result = await submitSellRequest(formData);
+
+    if (result.success) {
+      setSubmitStatus("success");
+      e.currentTarget.reset();
+      setMediaFiles([]);
+    } else {
+      setSubmitStatus("error");
+      setErrorMessage(result.error || "Failed to submit request");
+    }
+    setIsSubmitting(false);
+  };
 
   return (
     <div className="bg-[#FAF8F4] dark:bg-[#111111] text-[#111111] dark:text-white min-h-screen selection:bg-[#C8A45D] selection:text-white transition-colors duration-500 font-sans overflow-x-hidden">
@@ -272,25 +303,40 @@ export default function SellCarPage() {
 
           {/* Right Panel - Evaluation Form */}
           <div className="w-full lg:w-7/12 p-8 md:p-16 relative">
-            <form className="relative z-10 space-y-12">
-              
-              {/* Personal Information */}
-              <section>
-                <div className="flex items-center gap-4 mb-8">
-                  <span className="text-xs font-mono text-[#C8A45D] border border-[#C8A45D]/30 px-2.5 py-1 rounded-full">01</span>
-                  <h3 className="text-xl font-heading font-semibold text-[#111111] dark:text-white">Personal Information</h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="group relative">
-                    <input type="text" id="fullName" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Full Name" />
-                    <label htmlFor="fullName" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Full Name *</label>
+            {submitStatus === "success" ? (
+              <div className="flex flex-col items-center justify-center h-full text-center py-20">
+                <CheckCircle size={64} className="text-green-500 mb-6" />
+                <h3 className="text-3xl font-heading font-medium text-[#111111] dark:text-white mb-4">Request Submitted!</h3>
+                <p className="text-[#111111]/70 dark:text-white/70">
+                  Thank you! Our experts will evaluate your vehicle and get back to you shortly.
+                </p>
+                <Button 
+                  onClick={() => setSubmitStatus("idle")}
+                  className="mt-8 rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] px-8 py-3 text-xs uppercase tracking-widest font-semibold"
+                >
+                  Submit Another
+                </Button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="relative z-10 space-y-12">
+                
+                {/* Personal Information */}
+                <section>
+                  <div className="flex items-center gap-4 mb-8">
+                    <span className="text-xs font-mono text-[#C8A45D] border border-[#C8A45D]/30 px-2.5 py-1 rounded-full">01</span>
+                    <h3 className="text-xl font-heading font-semibold text-[#111111] dark:text-white">Personal Information</h3>
                   </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="group relative">
+                      <input required type="text" name="full_name" id="fullName" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Full Name" />
+                      <label htmlFor="fullName" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Full Name *</label>
+                    </div>
                   <div className="group relative">
-                    <input type="tel" id="phone" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Mobile Number" />
+                    <input required type="tel" name="phone" id="phone" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Mobile Number" />
                     <label htmlFor="phone" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Mobile Number *</label>
                   </div>
                   <div className="group relative md:col-span-2">
-                    <input type="email" id="email" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Email Address" />
+                    <input required type="email" name="email" id="email" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Email Address" />
                     <label htmlFor="email" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Email Address *</label>
                   </div>
                 </div>
@@ -304,24 +350,24 @@ export default function SellCarPage() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="group relative">
-                    <input type="text" id="brand" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Brand" />
+                    <input required type="text" name="brand" id="brand" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Brand" />
                     <label htmlFor="brand" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Brand *</label>
                   </div>
                   <div className="group relative">
-                    <input type="text" id="model" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Model" />
+                    <input required type="text" name="model" id="model" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Model" />
                     <label htmlFor="model" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Model *</label>
                   </div>
                   <div className="group relative">
-                    <input type="text" id="vehicleNumber" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Vehicle Number" />
+                    <input required type="text" name="vehicle_number" id="vehicleNumber" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Vehicle Number" />
                     <label htmlFor="vehicleNumber" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Vehicle Number *</label>
                   </div>
                   <div className="group relative">
-                    <input type="number" id="km" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Kilometers Driven" />
+                    <input required type="number" name="km_driven" id="km" className="peer w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white placeholder-transparent focus:outline-none focus:border-[#C8A45D] transition-colors" placeholder="Kilometers Driven" />
                     <label htmlFor="km" className="absolute left-0 -top-3.5 text-xs text-[#111111]/60 dark:text-white/60 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-black/40 dark:peer-placeholder-shown:text-white/40 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-[#C8A45D]">Kilometers Driven *</label>
                   </div>
                   
                   <div className="relative">
-                    <select className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
+                    <select required name="fuel_type" className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
                       <option value="" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Select Fuel Type *</option>
                       <option value="petrol" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Petrol</option>
                       <option value="diesel" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Diesel</option>
@@ -331,7 +377,7 @@ export default function SellCarPage() {
                     <ChevronDown size={16} className="absolute right-0 top-4 text-[#111111]/40 dark:text-white/40 pointer-events-none" />
                   </div>
                   <div className="relative">
-                    <select className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
+                    <select required name="transmission" className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
                       <option value="" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Select Transmission *</option>
                       <option value="auto" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Automatic</option>
                       <option value="manual" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Manual</option>
@@ -349,7 +395,7 @@ export default function SellCarPage() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                   <div className="relative">
-                    <select className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
+                    <select required name="ownership" className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
                       <option value="" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Ownership *</option>
                       <option value="1" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">1st Owner</option>
                       <option value="2" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">2nd Owner</option>
@@ -358,7 +404,7 @@ export default function SellCarPage() {
                     <ChevronDown size={16} className="absolute right-0 top-4 text-[#111111]/40 dark:text-white/40 pointer-events-none" />
                   </div>
                   <div className="relative">
-                    <select className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
+                    <select required name="insurance" className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
                       <option value="" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Insurance *</option>
                       <option value="comprehensive" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Comprehensive</option>
                       <option value="third-party" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Third Party</option>
@@ -367,7 +413,7 @@ export default function SellCarPage() {
                     <ChevronDown size={16} className="absolute right-0 top-4 text-[#111111]/40 dark:text-white/40 pointer-events-none" />
                   </div>
                   <div className="relative">
-                    <select className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
+                    <select required name="accident_history" className="w-full bg-transparent border-b border-[#111111]/20 dark:border-white/20 px-0 py-3 text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] appearance-none cursor-pointer">
                       <option value="" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Accident History *</option>
                       <option value="none" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">No Accidents</option>
                       <option value="minor" className="bg-[#FAF8F4] dark:bg-[#1A1A1A]">Minor Scratches</option>
@@ -380,13 +426,20 @@ export default function SellCarPage() {
                 {/* Premium Media Upload */}
                 <div className="mt-8">
                   <label className="block text-sm text-[#111111]/70 dark:text-white/70 mb-4 font-medium">Upload Vehicle Media & Documents</label>
-                  <PremiumUploader />
+                  <PremiumUploader onFilesChange={setMediaFiles} />
                 </div>
               </section>
 
               <div className="pt-6">
-                <Button type="button" className="w-full rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 py-6 text-xs uppercase tracking-widest font-semibold transition-all shadow-xl">
-                  Submit for Valuation
+                {submitStatus === "error" && (
+                  <p className="text-red-500 text-sm mb-4 text-center">{errorMessage}</p>
+                )}
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 py-6 text-xs uppercase tracking-widest font-semibold transition-all shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit for Valuation"}
                 </Button>
                 <p className="text-center text-[10px] text-[#111111]/50 dark:text-white/50 mt-4 font-light tracking-wide">
                   By submitting, you agree to our strict privacy policy and terms of service.
@@ -394,6 +447,7 @@ export default function SellCarPage() {
               </div>
 
             </form>
+            )}
           </div>
         </div>
       </section>

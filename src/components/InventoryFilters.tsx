@@ -5,12 +5,27 @@ import { ChevronDown, SlidersHorizontal, Car, Droplets, Gauge, Sparkles } from "
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-export default function InventoryFilters() {
+export type FilterState = {
+  brand: string;
+  fuel: string;
+  transmission: string;
+  yearRange: number[];
+};
+
+export interface InventoryFiltersProps {
+  filters: FilterState;
+  setFilters: React.Dispatch<React.SetStateAction<FilterState>>;
+}
+
+export default function InventoryFilters({ filters, setFilters }: InventoryFiltersProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [yearRange, setYearRange] = useState([2016, 2026]);
-  const [selectedBrand, setSelectedBrand] = useState("All Brands");
-  const [selectedFuel, setSelectedFuel] = useState("All Fuel Types");
-  const [selectedTrans, setSelectedTrans] = useState("All Transmissions");
+
+  const { brand: selectedBrand, fuel: selectedFuel, transmission: selectedTrans, yearRange } = filters;
+
+  const updateFilter = (key: keyof FilterState, value: any) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
 
   return (
     <div className="w-full bg-white dark:bg-[#131315] border border-[#111111]/10 dark:border-white/10 rounded-2xl p-5 md:p-6 shadow-xl mb-12 relative z-20 transition-colors duration-500">
@@ -39,7 +54,7 @@ export default function InventoryFilters() {
             </div>
             <select 
               value={selectedBrand}
-              onChange={(e) => setSelectedBrand(e.target.value)}
+              onChange={(e) => updateFilter("brand", e.target.value)}
               className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer"
             >
               <option value="All Brands" className="bg-white dark:bg-[#1A1A1A]">All Brands</option>
@@ -64,7 +79,7 @@ export default function InventoryFilters() {
             </div>
             <select 
               value={selectedFuel}
-              onChange={(e) => setSelectedFuel(e.target.value)}
+              onChange={(e) => updateFilter("fuel", e.target.value)}
               className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer"
             >
               <option value="All Fuel Types" className="bg-white dark:bg-[#1A1A1A]">All Fuel Types</option>
@@ -88,7 +103,7 @@ export default function InventoryFilters() {
             </div>
             <select 
               value={selectedTrans}
-              onChange={(e) => setSelectedTrans(e.target.value)}
+              onChange={(e) => updateFilter("transmission", e.target.value)}
               className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer"
             >
               <option value="All Transmissions" className="bg-white dark:bg-[#1A1A1A]">All Transmissions</option>
@@ -115,7 +130,7 @@ export default function InventoryFilters() {
               min={2016}
               max={2026}
               value={yearRange}
-              onChange={(val) => setYearRange(val as number[])}
+              onChange={(val) => updateFilter("yearRange", val as number[])}
               trackStyle={{ backgroundColor: '#C8A45D', height: 4 }}
               railStyle={{ backgroundColor: 'rgba(200, 164, 93, 0.2)', height: 4 }}
               handleStyle={[

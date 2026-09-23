@@ -10,48 +10,19 @@ import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "./ui/Button";
 
-// Dummy data for the showroom
-const showroomCars = [
-  {
-    id: 1,
-    brand: "PORSCHE",
-    model: "MACAN S",
-    priceText: "7.147 kr. pr. md.",
-    location: "København",
-    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop", 
-    certification: "PORSCHE APPROVED",
-  },
-  {
-    id: 2,
-    brand: "PORSCHE",
-    model: "TAYCAN 4",
-    priceText: "10.494 kr. pr. md.",
-    location: "Aarhus",
-    image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1200&auto=format&fit=crop", 
-    certification: "PORSCHE APPROVED",
-  },
-  {
-    id: 3,
-    brand: "PORSCHE",
-    model: "CAYENNE",
-    priceText: "16.962 kr. pr. md.",
-    location: "Aalborg",
-    image: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=1200&auto=format&fit=crop", 
-    certification: "PORSCHE APPROVED",
-  },
-  {
-    id: 4,
-    brand: "PORSCHE",
-    model: "911 GT3",
-    priceText: "53.422 kr. pr. md.",
-    location: "København",
-    image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=1200&auto=format&fit=crop", 
-    certification: "PORSCHE APPROVED",
-  }
-];
-
-export default function ShowroomCarousel() {
+export default function ShowroomCarousel({ cars = [] }: { cars?: any[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!cars || cars.length === 0) {
+    return (
+      <div className="w-full relative pt-24 pb-8 overflow-hidden flex flex-col items-center justify-center">
+        <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight text-[#111111] dark:text-white mb-4">
+          Coming <span className="italic text-[#111111]/60 dark:text-white/60">Soon</span>
+        </h2>
+        <p className="text-[#111111]/60 dark:text-white/60">No vehicles are currently arriving soon. Check back later!</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full relative pt-24 pb-8 overflow-hidden">
@@ -93,7 +64,7 @@ export default function ShowroomCarousel() {
           grabCursor={true}
           speed={600}
         >
-          {showroomCars.map((car, index) => {
+          {cars.map((car, index) => {
             const isActive = index === activeIndex;
             return (
               <SwiperSlide key={car.id} className="transition-all duration-700 ease-out">
@@ -105,8 +76,6 @@ export default function ShowroomCarousel() {
                     aspectRatio: "16/9",
                   }}
                 >
-                  {/* Certification Badge Removed */}
-
                   {/* Car Image - Object Contain to show full car with padding */}
                   <div className="absolute inset-4 md:inset-8 flex items-center justify-center">
                     <Image

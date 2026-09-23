@@ -2,8 +2,8 @@ import { Jimp } from 'jimp';
 
 async function processLogo() {
   try {
-    const inputPath = 'c:/Users/jasil/OneDrive/Desktop/AutoHeads/autoheads logo jpg.jpg.jpeg';
-    const outputPath = 'c:/Users/jasil/OneDrive/Desktop/AutoHeads/public/logo.png';
+    const inputPath = 'c:/Users/jasil/OneDrive/Desktop/AutoHeads/image.png';
+    const outputPath = 'c:/Users/jasil/OneDrive/Desktop/AutoHeads/public/footer-logo-transparent.png';
 
     const image = await Jimp.read(inputPath);
 

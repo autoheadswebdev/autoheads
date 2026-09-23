@@ -2,10 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { ArrowRight, MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <footer className="bg-[#FAF8F4] dark:bg-[#111111] text-[#111111] dark:text-white pt-24 pb-12 border-t border-[#111111]/10 dark:border-white/10 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-6">
@@ -14,9 +19,9 @@ export default function Footer() {
           {/* Brand Info (Left) */}
           <div className="lg:col-span-4 flex flex-col">
             <Link href="/" className="mb-6 block dark:invert transition-all">
-              <div className="relative w-44 md:w-56 h-14 md:h-18 flex items-center">
+              <div className="relative w-64 md:w-80 h-24 md:h-32 flex items-center">
                 <Image 
-                  src="/logo.png" 
+                  src="/footer-logo-transparent.png" 
                   alt="AutoHeads Logo" 
                   fill 
                   className="object-contain object-left"

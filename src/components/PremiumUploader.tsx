@@ -32,7 +32,7 @@ const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
 const MAX_DOC_SIZE = 20 * 1024 * 1024; // 20MB
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100MB
 
-export default function PremiumUploader() {
+export default function PremiumUploader({ onFilesChange }: { onFilesChange?: (files: File[]) => void }) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<UploadCategory>("exterior");
@@ -100,6 +100,8 @@ export default function PremiumUploader() {
 
     const filesArray = Array.from(newFiles);
     
+    let newFilesList: UploadedFile[] = [];
+
     filesArray.forEach(file => {
       const errorMsg = validateFile(file, selectedCategory);
       
@@ -113,12 +115,16 @@ export default function PremiumUploader() {
         errorMsg: errorMsg || undefined
       };
 
-      setFiles(prev => [...prev, newFileObj]);
+      newFilesList.push(newFileObj);
 
       if (!errorMsg) {
         simulateUpload(newFileObj.id);
       }
     });
+
+    const updated = [...files, ...newFilesList];
+    setFiles(updated);
+    if (onFilesChange) onFilesChange(updated.map(f => f.file));
 
     // Reset input
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -132,13 +138,13 @@ export default function PremiumUploader() {
   };
 
   const removeFile = (id: string) => {
-    setFiles(prev => {
-      const fileToRemove = prev.find(f => f.id === id);
-      if (fileToRemove?.previewUrl) {
-        URL.revokeObjectURL(fileToRemove.previewUrl);
-      }
-      return prev.filter(f => f.id !== id);
-    });
+    const fileToRemove = files.find(f => f.id === id);
+    if (fileToRemove?.previewUrl) {
+      URL.revokeObjectURL(fileToRemove.previewUrl);
+    }
+    const updated = files.filter(f => f.id !== id);
+    setFiles(updated);
+    if (onFilesChange) onFilesChange(updated.map(f => f.file));
   };
 
   return (

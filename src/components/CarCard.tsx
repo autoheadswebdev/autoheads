@@ -16,6 +16,7 @@ export type CarProps = {
   price: string;
   image: string;
   isNew?: boolean;
+  status?: string;
 };
 
 export default function CarCard({
@@ -39,9 +40,19 @@ export default function CarCard({
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
-            {car.isNew && (
+            {car.isNew && car.status !== 'Booked' && (
               <div className="absolute top-5 left-5 bg-[#C8A45D] text-black text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-md z-10 shadow-lg">
                 NEW ARRIVAL
+              </div>
+            )}
+            {car.status === 'Booked' && (
+              <div className="absolute top-5 right-5 bg-red-500 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-md z-10 shadow-lg">
+                BOOKED
+              </div>
+            )}
+            {car.status === 'Sold' && (
+              <div className="absolute top-5 right-5 bg-[#111111] text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-md z-10 shadow-lg">
+                SOLD
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white dark:to-[#121214] hidden md:block" />
@@ -107,8 +118,8 @@ export default function CarCard({
         </div>
         
         {/* Top Floating Badge Bar */}
-        <div className="relative z-10 p-6 flex justify-between items-center">
-          {car.isNew ? (
+        <div className="relative z-10 p-6 flex justify-between items-start w-full">
+          {car.isNew && car.status !== 'Booked' ? (
             <div className="bg-[#C8A45D]/20 backdrop-blur-md border border-[#C8A45D]/40 text-[#C8A45D] dark:text-[#E0BC75] text-[10px] font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-md shadow-lg">
               NEW ARRIVAL
             </div>
@@ -116,8 +127,19 @@ export default function CarCard({
             <div />
           )}
 
-
-        </div>        {/* Bottom Card Content */}
+          {car.status === 'Booked' && (
+            <div className="bg-red-500/90 backdrop-blur-md border border-red-500/40 text-white text-[10px] font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-md shadow-lg">
+              BOOKED
+            </div>
+          )}
+          {car.status === 'Sold' && (
+            <div className="bg-[#111111]/90 backdrop-blur-md border border-[#111111]/40 text-white text-[10px] font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-md shadow-lg">
+              SOLD
+            </div>
+          )}
+        </div>
+        
+        {/* Bottom Card Content */}
         <div className="relative z-10 p-6 flex flex-col justify-end">
           <div className="text-[#C8A45D] font-mono text-xs tracking-widest uppercase mb-1 font-bold">
             {car.year} • {car.brand}
