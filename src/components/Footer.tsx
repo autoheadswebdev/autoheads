@@ -12,33 +12,34 @@ export default function Footer() {
   if (pathname?.startsWith("/admin")) return null;
 
   return (
-    <footer className="bg-[#FAF8F4] dark:bg-[#111111] text-[#111111] dark:text-white pt-24 pb-12 border-t border-[#111111]/10 dark:border-white/10 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
+    <footer className="bg-[#FAF8F4] dark:bg-[#111111] text-[#111111] dark:text-white pt-16 sm:pt-24 pb-12 border-t border-[#111111]/10 dark:border-white/10 transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 mb-16 sm:mb-20">
           
           {/* Brand Info (Left) */}
           <div className="lg:col-span-4 flex flex-col">
-            <Link href="/" className="mb-6 block dark:invert transition-all">
-              <div className="relative w-64 md:w-80 h-24 md:h-32 flex items-center">
+            <Link href="/" className="mb-4 sm:mb-6 block dark:invert transition-all min-h-[44px]">
+              <div className="relative w-56 sm:w-64 md:w-80 h-20 sm:h-24 md:h-32 flex items-center">
                 <Image 
                   src="/footer-logo-transparent.png" 
                   alt="AutoHeads Logo" 
                   fill 
+                  sizes="(max-width: 640px) 220px, 320px"
                   className="object-contain object-left"
                 />
               </div>
             </Link>
-            <p className="text-[#111111]/60 dark:text-white/60 text-sm leading-relaxed mb-8 max-w-sm transition-colors duration-500">
+            <p className="text-[#111111]/60 dark:text-white/60 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8 max-w-sm transition-colors duration-500">
               India's finest collection of premium pre-owned luxury automobiles. Experience uncompromised quality, transparent pricing, and unparalleled customer service.
             </p>
-            <div className="flex gap-4">
-              <a href="https://instagram.com/autoheads_automotive" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#111111]/5 dark:bg-white/5 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-colors border border-[#111111]/10 dark:border-white/10 text-[#111111]/80 dark:text-white/80">
+            <div className="flex gap-3 sm:gap-4">
+              <a href="https://instagram.com/autoheads_automotive" target="_blank" rel="noreferrer" className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-[#111111]/5 dark:bg-white/5 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-colors border border-[#111111]/10 dark:border-white/10 text-[#111111]/80 dark:text-white/80" aria-label="AutoHeads Instagram">
                 <FaInstagram size={18} />
               </a>
-              <a href="https://facebook.com/autoheadsautomotive" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#111111]/5 dark:bg-white/5 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-colors border border-[#111111]/10 dark:border-white/10 text-[#111111]/80 dark:text-white/80">
+              <a href="https://facebook.com/autoheadsautomotive" target="_blank" rel="noreferrer" className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-[#111111]/5 dark:bg-white/5 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-colors border border-[#111111]/10 dark:border-white/10 text-[#111111]/80 dark:text-white/80" aria-label="AutoHeads Facebook">
                 <FaFacebook size={18} />
               </a>
-              <a href="https://wa.me/917034226675" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#111111]/5 dark:bg-white/5 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-colors border border-[#111111]/10 dark:border-white/10 text-[#111111]/80 dark:text-white/80">
+              <a href="https://wa.me/917034226675" target="_blank" rel="noreferrer" className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-[#111111]/5 dark:bg-white/5 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-colors border border-[#111111]/10 dark:border-white/10 text-[#111111]/80 dark:text-white/80" aria-label="AutoHeads WhatsApp">
                 <FaWhatsapp size={18} />
               </a>
             </div>

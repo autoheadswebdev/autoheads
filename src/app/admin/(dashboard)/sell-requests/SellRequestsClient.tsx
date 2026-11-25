@@ -38,7 +38,7 @@ export default function SellRequestsClient({ initialRequests }: { initialRequest
           <tbody className="divide-y divide-[#111111]/10 dark:divide-white/10">
             {requests.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-12 text-center text-[#111111]/50 dark:text-white/50 text-sm">
+                <td colSpan={5} className="px-6 py-12 text-center text-[#111111]/50 dark:text-white/50 text-sm">
                   No sell requests found.
                 </td>
               </tr>

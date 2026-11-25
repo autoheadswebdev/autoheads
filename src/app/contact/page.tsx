@@ -25,7 +25,7 @@ export default function ContactPage() {
     <div className="bg-[#FAF8F4] dark:bg-[#0B0B0C] text-[#111111] dark:text-white min-h-screen selection:bg-[#C8A45D] selection:text-white transition-colors duration-500 font-sans overflow-x-hidden">
       
       {/* 1. HERO SECTION (Matching Reference Mockup 100%) */}
-      <section className="relative w-full min-h-[85vh] pt-16 md:pt-20 lg:pt-22 pb-12 px-6 lg:px-12 flex flex-col justify-between items-center overflow-hidden">
+      <section className="relative w-full min-h-[80vh] sm:min-h-[85vh] pt-20 sm:pt-24 md:pt-26 lg:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-12 flex flex-col justify-between items-center overflow-hidden">
         <div className="max-w-[1600px] w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 flex-grow">
           
           {/* Hero Left (Typography) */}
@@ -33,16 +33,16 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="lg:col-span-6 flex flex-col space-y-6 md:space-y-8 z-20"
+            className="lg:col-span-6 flex flex-col space-y-4 sm:space-y-6 md:space-y-8 z-20"
           >
-            <div className="inline-flex items-center gap-3">
-              <span className="w-6 h-[1.5px] bg-[#C8A45D]" />
-              <span className="text-[11px] font-mono tracking-[0.25em] uppercase font-semibold text-[#111111]/60 dark:text-white/60">
+            <div className="inline-flex items-center gap-2.5 sm:gap-3">
+              <span className="w-5 sm:w-6 h-[1.5px] bg-[#C8A45D]" />
+              <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.2em] sm:tracking-[0.25em] uppercase font-semibold text-[#111111]/60 dark:text-white/60">
                 WE'RE HERE TO HELP
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] font-heading font-extrabold tracking-tight text-[#111111] dark:text-white">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.96] font-heading font-extrabold tracking-tight text-[#111111] dark:text-white">
               DRIVEN <br />
               BY PASSION <br />
               <span className="font-serif italic font-normal text-[#111111]/30 dark:text-white/30 block mt-1 tracking-normal">
@@ -50,23 +50,23 @@ export default function ContactPage() {
               </span>
             </h1>
             
-            <p className="text-sm md:text-base text-[#111111]/70 dark:text-white/70 max-w-lg font-light leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base text-[#111111]/70 dark:text-white/70 max-w-lg font-light leading-relaxed">
               India's premier destination for luxury pre-owned cars, handpicked for those who expect more from every drive.
             </p>
             
             {/* Quick Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a href="tel:+917034226675">
-                <Button className="rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+              <a href="tel:+917034226675" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] hover:bg-[#333333] dark:hover:bg-gray-200 px-7 sm:px-8 py-5 sm:py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 group flex items-center justify-center gap-3 shadow-xl min-h-[48px]">
                   <Phone size={15} />
                   CALL US NOW
                 </Button>
               </a>
-              <span className="text-xs font-mono text-[#111111]/50 dark:text-white/50 uppercase tracking-widest px-2">
+              <span className="text-xs font-mono text-[#111111]/50 dark:text-white/50 uppercase tracking-widest px-2 hidden sm:inline-block">
                 OR
               </span>
-              <a href="https://wa.me/917034226675" target="_blank" rel="noreferrer">
-                <Button variant="outline" className="rounded-full border border-[#111111]/20 dark:border-white/20 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-8 py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 flex items-center gap-3">
+              <a href="https://wa.me/917034226675" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto rounded-full border border-[#111111]/20 dark:border-white/20 bg-transparent text-[#111111] dark:text-white hover:bg-[#111111] hover:text-white dark:hover:bg-white dark:hover:text-[#111111] px-7 sm:px-8 py-5 sm:py-6 text-[11px] uppercase tracking-[0.18em] font-semibold transition-all duration-300 flex items-center justify-center gap-3 min-h-[48px]">
                   <FaWhatsapp size={16} className="text-[#25D366]" />
                   WHATSAPP US
                 </Button>
@@ -79,25 +79,26 @@ export default function ContactPage() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="lg:col-span-6 relative h-[420px] md:h-[580px] w-full flex items-center justify-center -mr-6 lg:-mr-12"
+            transition={{ duration: 1.1, ease: "easeOut" }}
+            className="lg:col-span-6 relative h-[320px] sm:h-[420px] md:h-[580px] w-full flex items-center justify-center lg:-mr-12"
           >
-            <div className="relative w-full h-full overflow-hidden group rounded-3xl lg:rounded-none">
+            <div className="relative w-full h-full overflow-hidden group rounded-2xl sm:rounded-3xl lg:rounded-none">
               <Image 
                 src="/contact-hero.png" 
                 alt="Luxury Black Mercedes SUV Showroom" 
                 fill 
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
                 priority
               />
               
               {/* Soft Edge Blends */}
-              <div className="absolute inset-y-0 left-0 w-28 md:w-44 bg-gradient-to-r from-[#FAF8F4] dark:from-[#0B0B0C] via-[#FAF8F4]/50 dark:via-[#0B0B0C]/50 to-transparent pointer-events-none z-10" />
-              <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#FAF8F4] dark:from-[#0B0B0C] to-transparent pointer-events-none z-10" />
-              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#FAF8F4] dark:from-[#0B0B0C] to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-y-0 left-0 w-20 sm:w-28 md:w-44 bg-gradient-to-r from-[#FAF8F4] dark:from-[#0B0B0C] via-[#FAF8F4]/50 dark:via-[#0B0B0C]/50 to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 top-0 h-16 sm:h-20 bg-gradient-to-b from-[#FAF8F4] dark:from-[#0B0B0C] to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[#FAF8F4] dark:from-[#0B0B0C] to-transparent pointer-events-none z-10" />
 
               {/* Lower Right AH Monogram */}
-              <div className="absolute bottom-8 right-8 z-20 hidden sm:flex items-center justify-center w-16 h-16 rounded-full border border-white/40 bg-black/20 backdrop-blur-md text-white font-heading text-xs font-bold tracking-tighter opacity-80">
+              <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-20 hidden sm:flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-white/40 bg-black/20 backdrop-blur-md text-white font-heading text-xs font-bold tracking-tighter opacity-80">
                 AH
               </div>
             </div>

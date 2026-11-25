@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
-    value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' data: fonts.gstatic.com; img-src 'self' blob: data: https://images.unsplash.com https://qgpapkwhdqjsvtksyldp.supabase.co; connect-src 'self';"
+    value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' data: fonts.gstatic.com; img-src 'self' blob: data: https://images.unsplash.com https://qgpapkwhdqjsvtksyldp.supabase.co; connect-src 'self' https://qgpapkwhdqjsvtksyldp.supabase.co wss://qgpapkwhdqjsvtksyldp.supabase.co https://images.unsplash.com;"
   },
   {
     key: 'X-DNS-Prefetch-Control',
@@ -37,6 +37,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
   experimental: {
     serverActions: {
       bodySizeLimit: '1000mb',

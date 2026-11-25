@@ -10,12 +10,14 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500"],
+  display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -40,6 +42,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://autoheads.dk'),
   title: {
     default: "AutoHeads | Premium Luxury Car Dealership",
     template: "%s | AutoHeads"

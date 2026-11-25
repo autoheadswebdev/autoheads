@@ -33,6 +33,9 @@ export async function login(formData: FormData) {
     });
 
     if (error) {
+      if (error.message.includes('fetch failed')) {
+        return { error: "Unable to connect to authentication server. Your Supabase project may be paused or offline." };
+      }
       return { error: error.message };
     }
 

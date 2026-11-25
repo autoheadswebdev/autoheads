@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Phone, MessageCircle } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
@@ -17,8 +17,29 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   const navLinks = [
@@ -31,23 +52,28 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 px-4 md:px-8 py-2 md:py-3 transition-all duration-500 pointer-events-none">
+      <header className="fixed top-0 left-0 w-full z-50 px-3 sm:px-6 md:px-8 py-2 md:py-3 transition-all duration-500 pointer-events-none">
         <div 
           className={`mx-auto pointer-events-auto transition-all duration-500 ease-out ${
             isScrolled 
-              ? "max-w-5xl bg-white/80 dark:bg-[#111111]/85 backdrop-blur-2xl shadow-xl shadow-black/[0.04] dark:shadow-white/[0.02] rounded-full border border-black/5 dark:border-white/10 py-1.5 px-8" 
+              ? "max-w-5xl bg-white/85 dark:bg-[#111111]/90 backdrop-blur-2xl shadow-xl shadow-black/[0.04] dark:shadow-white/[0.02] rounded-full border border-black/5 dark:border-white/10 py-1.5 px-4 sm:px-8" 
               : "max-w-7xl bg-transparent py-1 px-2"
           }`}
         >
           <div className="flex justify-between items-center h-12 md:h-14">
             
             {/* Official AutoHeads Logo */}
-            <Link href="/" className="flex items-center group h-10 md:h-12 relative">
-              <div className="relative w-40 md:w-52 lg:w-56 h-full flex items-center mix-blend-multiply dark:mix-blend-screen dark:invert transition-all origin-left">
+            <Link 
+              href="/" 
+              className="flex items-center group h-10 md:h-12 relative min-w-[44px]"
+              aria-label="AutoHeads Home"
+            >
+              <div className="relative w-36 sm:w-44 md:w-52 lg:w-56 h-full flex items-center mix-blend-multiply dark:mix-blend-screen dark:invert transition-all origin-left">
                 <Image 
                   src="/autoheads-logo-transparent.png" 
                   alt="AutoHeads Automotive Experts" 
                   fill 
+                  sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 224px"
                   className="object-contain object-left" 
                   priority 
                 />
@@ -60,7 +86,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-xs tracking-wider text-[#111111]/70 dark:text-white/70 hover:text-[#111111] dark:hover:text-white transition-colors duration-300 font-medium font-sans"
+                  className="text-xs tracking-wider text-[#111111]/70 dark:text-white/70 hover:text-[#111111] dark:hover:text-white transition-colors duration-300 font-medium font-sans py-2"
                 >
                   {link.name}
                 </Link>
@@ -72,7 +98,7 @@ export default function Navbar() {
               <ThemeToggle />
               <Link 
                 href="/inventory"
-                className="inline-flex items-center gap-1.5 text-xs tracking-wider uppercase font-semibold text-[#111111] dark:text-white bg-[#111111]/5 dark:bg-white/10 hover:bg-[#111111] dark:hover:bg-white hover:text-white dark:hover:text-[#111111] px-4 py-2 rounded-full border border-[#111111]/10 dark:border-white/15 transition-all duration-300 group"
+                className="inline-flex items-center gap-1.5 text-xs tracking-wider uppercase font-semibold text-[#111111] dark:text-white bg-[#111111]/5 dark:bg-white/10 hover:bg-[#111111] dark:hover:bg-white hover:text-white dark:hover:text-[#111111] px-5 py-2.5 rounded-full border border-[#111111]/10 dark:border-white/15 transition-all duration-300 group min-h-[40px]"
               >
                 <span>Inventory</span>
                 <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -80,14 +106,15 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu Controls */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="md:hidden flex items-center gap-1.5">
               <ThemeToggle />
               <button
-                className="text-[#111111] dark:text-white p-1.5 focus:outline-none"
+                className="text-[#111111] dark:text-white p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle Navigation"
+                aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+                aria-expanded={mobileMenuOpen}
               >
-                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
           </div>
@@ -98,22 +125,36 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(24px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-40 bg-white/95 dark:bg-[#111111]/95 pt-28 px-8 pb-12 md:hidden flex flex-col justify-between"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-2xl pt-24 px-6 pb-8 md:hidden flex flex-col justify-between overflow-y-auto"
           >
-            <nav className="flex flex-col gap-6">
+            <nav className="flex flex-col gap-5 pt-4">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 }}
+              >
+                <Link
+                  href="/"
+                  className="text-2xl font-heading font-light tracking-wide text-[#111111] dark:text-white hover:text-[#C8A45D] transition-colors block py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+              </motion.div>
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.name}
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06 }}
+                  transition={{ delay: 0.08 + i * 0.05 }}
                 >
                   <Link
                     href={link.href}
-                    className="text-2xl font-heading font-light tracking-wide text-[#111111] dark:text-white hover:text-[#C8A45D] transition-colors block"
+                    className="text-2xl font-heading font-light tracking-wide text-[#111111] dark:text-white hover:text-[#C8A45D] transition-colors block py-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -122,16 +163,36 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <div className="pt-8 border-t border-[#111111]/10 dark:border-white/10 flex flex-col gap-4">
+            <div className="pt-6 border-t border-[#111111]/10 dark:border-white/10 flex flex-col gap-3">
               <Link 
                 href="/inventory" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-4 rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] text-xs tracking-widest uppercase font-semibold"
+                className="w-full text-center py-3.5 rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] text-xs tracking-widest uppercase font-semibold shadow-lg min-h-[44px] flex items-center justify-center"
               >
-                Inventory
+                Explore Inventory
               </Link>
-              <div className="text-[10px] font-mono tracking-widest text-[#111111]/40 dark:text-white/40 text-center uppercase">
-                AutoHeads • Luxury Automobiles
+              
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <a 
+                  href="tel:+917034226675"
+                  className="py-3 px-3 rounded-full border border-[#111111]/20 dark:border-white/20 text-[#111111] dark:text-white text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[44px]"
+                >
+                  <Phone size={14} className="text-[#C8A45D]" />
+                  <span>Call Us</span>
+                </a>
+                <a 
+                  href="https://wa.me/917034226675" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="py-3 px-3 rounded-full border border-[#25D366]/40 text-[#25D366] text-[11px] font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5 min-h-[44px]"
+                >
+                  <MessageCircle size={14} />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+
+              <div className="text-[10px] font-mono tracking-widest text-[#111111]/40 dark:text-white/40 text-center uppercase pt-2">
+                AutoHeads • Luxury Pre-Owned Automobiles
               </div>
             </div>
           </motion.div>

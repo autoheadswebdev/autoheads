@@ -19,11 +19,11 @@ export default async function SellRequestsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="p-4 sm:p-6 md:p-8 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-heading font-medium text-[#111111] dark:text-white">Sell Requests</h1>
-          <p className="text-[#111111]/60 dark:text-white/60 text-sm mt-1">Manage valuation requests from customers.</p>
+          <h1 className="text-xl sm:text-2xl font-heading font-medium text-[#111111] dark:text-white">Sell Requests</h1>
+          <p className="text-[#111111]/60 dark:text-white/60 text-xs sm:text-sm mt-1">Manage valuation requests from customers.</p>
         </div>
       </div>
       <SellRequestsClient initialRequests={requests || []} />

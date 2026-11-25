@@ -93,39 +93,40 @@ export default function AddVehiclePage() {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <div className="flex items-center gap-4 mb-8">
-        <Link href="/admin/vehicles" className="p-2 hover:bg-[#111111]/5 dark:hover:bg-white/5 rounded-lg transition-colors">
+    <div className="p-4 sm:p-6 md:p-8 max-w-4xl mx-auto">
+      <div className="flex items-center gap-4 mb-6 sm:mb-8">
+        <Link href="/admin/vehicles" className="p-2 hover:bg-[#111111]/5 dark:hover:bg-white/5 rounded-lg transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
           <ArrowLeft size={20} className="text-[#111111] dark:text-white" />
         </Link>
-        <h1 className="text-2xl font-heading font-bold text-[#111111] dark:text-white">Add New Vehicle</h1>
+        <h1 className="text-xl sm:text-2xl font-heading font-bold text-[#111111] dark:text-white">Add New Vehicle</h1>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
         
         {/* Image Upload */}
-        <div className="bg-white dark:bg-[#131315] p-6 rounded-2xl border border-[#111111]/10 dark:border-white/10 shadow-sm">
-          <h2 className="text-sm font-semibold tracking-widest uppercase text-[#111111] dark:text-white mb-4">Vehicle Images</h2>
+        <div className="bg-white dark:bg-[#131315] p-4 sm:p-6 rounded-2xl border border-[#111111]/10 dark:border-white/10 shadow-sm">
+          <h2 className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-[#111111] dark:text-white mb-4">Vehicle Images</h2>
           <div className="space-y-4">
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               {imagePreviews.map((preview, idx) => (
-                <div key={idx} className="w-40 h-32 rounded-xl bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 relative overflow-hidden group">
-                  <Image src={preview} alt={`Preview ${idx + 1}`} fill className="object-cover" />
+                <div key={idx} className="w-32 sm:w-40 h-28 sm:h-32 rounded-xl bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 relative overflow-hidden group">
+                  <Image src={preview} alt={`Preview ${idx + 1}`} fill sizes="160px" className="object-cover" />
                   <button 
                     type="button"
                     onClick={() => removeImage(idx)}
-                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity min-w-[28px] min-h-[28px] flex items-center justify-center shadow-md"
+                    aria-label={`Remove photo ${idx + 1}`}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                   </button>
                   {idx === 0 && (
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] uppercase font-bold text-center py-1">
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[9px] sm:text-[10px] uppercase font-bold text-center py-0.5 sm:py-1">
                       Featured
                     </div>
                   )}
                 </div>
               ))}
-              <div className="w-40 h-32 rounded-xl bg-[#111111]/5 dark:bg-white/5 border-2 border-dashed border-[#111111]/20 dark:border-white/20 relative flex items-center justify-center">
+              <div className="w-32 sm:w-40 h-28 sm:h-32 rounded-xl bg-[#111111]/5 dark:bg-white/5 border-2 border-dashed border-[#111111]/20 dark:border-white/20 relative flex items-center justify-center">
                 <input
                   type="file"
                   accept="image/*"
@@ -136,7 +137,7 @@ export default function AddVehiclePage() {
                 />
                 <label 
                   htmlFor="image-upload"
-                  className="flex flex-col items-center justify-center w-full h-full cursor-pointer hover:bg-[#111111]/5 dark:hover:bg-white/5 transition-colors"
+                  className="flex flex-col items-center justify-center w-full h-full cursor-pointer hover:bg-[#111111]/5 dark:hover:bg-white/5 transition-colors p-2 text-center"
                 >
                   <Upload size={24} className="text-[#111111]/40 dark:text-white/40 mb-2" />
                   <span className="text-xs font-medium text-[#111111]/60 dark:text-white/60">Add Images</span>

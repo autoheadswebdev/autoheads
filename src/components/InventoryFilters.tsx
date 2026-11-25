@@ -26,26 +26,56 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
+  const isFiltered = selectedBrand !== "All Brands" || 
+    selectedFuel !== "All Fuel Types" || 
+    selectedTrans !== "All Transmissions" || 
+    yearRange[0] !== 2016 || 
+    yearRange[1] !== 2026;
+
+  const resetFilters = () => {
+    setFilters({
+      brand: "All Brands",
+      fuel: "All Fuel Types",
+      transmission: "All Transmissions",
+      yearRange: [2016, 2026],
+    });
+  };
 
   return (
-    <div className="w-full bg-white dark:bg-[#131315] border border-[#111111]/10 dark:border-white/10 rounded-2xl p-5 md:p-6 shadow-xl mb-12 relative z-20 transition-colors duration-500">
+    <div className="w-full bg-white dark:bg-[#131315] border border-[#111111]/10 dark:border-white/10 rounded-2xl p-4 sm:p-5 md:p-6 shadow-xl mb-8 sm:mb-12 relative z-20 transition-colors duration-500">
       
       {/* Mobile Filter Toggle */}
-      <div className="flex justify-between items-center md:hidden">
+      <div className="flex items-center gap-2 md:hidden">
         <button 
           onClick={() => setFiltersOpen(!filtersOpen)}
-          className="w-full flex justify-between items-center bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-[#111111] dark:text-white"
+          className="flex-1 flex justify-between items-center bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl px-4 py-3 text-xs sm:text-sm text-[#111111] dark:text-white min-h-[44px]"
+          aria-expanded={filtersOpen}
         >
-          <span className="flex items-center gap-2 font-medium"><SlidersHorizontal size={16} className="text-[#C8A45D]" /> Filter Options</span>
-          <ChevronDown size={16} className={`transition-transform ${filtersOpen ? "rotate-180" : ""}`} />
+          <span className="flex items-center gap-2 font-medium">
+            <SlidersHorizontal size={16} className="text-[#C8A45D]" /> 
+            <span>Filters</span>
+            {isFiltered && (
+              <span className="w-2 h-2 rounded-full bg-[#C8A45D]" />
+            )}
+          </span>
+          <ChevronDown size={16} className={`transition-transform duration-300 ${filtersOpen ? "rotate-180" : ""}`} />
         </button>
+
+        {isFiltered && (
+          <button
+            onClick={resetFilters}
+            className="px-3.5 py-3 rounded-xl text-xs font-semibold uppercase tracking-wider text-[#C8A45D] hover:bg-[#C8A45D]/10 transition-colors min-h-[44px] flex items-center justify-center border border-[#C8A45D]/30"
+          >
+            Reset
+          </button>
+        )}
       </div>
 
-      <div className={`${filtersOpen ? "flex" : "hidden"} md:flex flex-col md:flex-row gap-5 lg:gap-6 items-center justify-between mt-4 md:mt-0`}>
+      <div className={`${filtersOpen ? "flex" : "hidden"} md:flex flex-col md:flex-row gap-4 sm:gap-5 lg:gap-6 items-stretch md:items-center justify-between mt-4 md:mt-0`}>
         
         {/* Brand */}
         <div className="w-full md:w-1/4">
-          <label className="block text-[10px] font-mono tracking-widest text-[#111111]/60 dark:text-white/50 uppercase mb-2">
+          <label className="block text-[10px] font-mono tracking-widest text-[#111111]/60 dark:text-white/50 uppercase mb-1.5 sm:mb-2">
             BRAND
           </label>
           <div className="relative">
@@ -55,7 +85,8 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
             <select 
               value={selectedBrand}
               onChange={(e) => updateFilter("brand", e.target.value)}
-              className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer"
+              aria-label="Filter by Brand"
+              className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer min-h-[44px]"
             >
               <option value="All Brands" className="bg-white dark:bg-[#1A1A1A]">All Brands</option>
               <option value="Skoda" className="bg-white dark:bg-[#1A1A1A]">Skoda</option>
@@ -70,7 +101,7 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
 
         {/* Fuel Type */}
         <div className="w-full md:w-1/4">
-          <label className="block text-[10px] font-mono tracking-widest text-[#111111]/60 dark:text-white/50 uppercase mb-2">
+          <label className="block text-[10px] font-mono tracking-widest text-[#111111]/60 dark:text-white/50 uppercase mb-1.5 sm:mb-2">
             FUEL TYPE
           </label>
           <div className="relative">
@@ -80,7 +111,8 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
             <select 
               value={selectedFuel}
               onChange={(e) => updateFilter("fuel", e.target.value)}
-              className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer"
+              aria-label="Filter by Fuel Type"
+              className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer min-h-[44px]"
             >
               <option value="All Fuel Types" className="bg-white dark:bg-[#1A1A1A]">All Fuel Types</option>
               <option value="Petrol" className="bg-white dark:bg-[#1A1A1A]">Petrol</option>
@@ -94,7 +126,7 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
 
         {/* Transmission */}
         <div className="w-full md:w-1/4">
-          <label className="block text-[10px] font-mono tracking-widest text-[#111111]/60 dark:text-white/50 uppercase mb-2">
+          <label className="block text-[10px] font-mono tracking-widest text-[#111111]/60 dark:text-white/50 uppercase mb-1.5 sm:mb-2">
             TRANSMISSION
           </label>
           <div className="relative">
@@ -104,7 +136,8 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
             <select 
               value={selectedTrans}
               onChange={(e) => updateFilter("transmission", e.target.value)}
-              className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer"
+              aria-label="Filter by Transmission"
+              className="w-full appearance-none bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl pl-11 pr-10 py-3 text-xs md:text-sm font-medium text-[#111111] dark:text-white focus:outline-none focus:border-[#C8A45D] transition-colors cursor-pointer min-h-[44px]"
             >
               <option value="All Transmissions" className="bg-white dark:bg-[#1A1A1A]">All Transmissions</option>
               <option value="Automatic" className="bg-white dark:bg-[#1A1A1A]">Automatic</option>
@@ -116,7 +149,7 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
 
         {/* Year Range (Dual Handle Slider with Gold Track) */}
         <div className="w-full md:w-1/4">
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex justify-between items-center mb-1.5 sm:mb-2">
             <label className="block text-[10px] font-mono tracking-widest text-[#111111]/60 dark:text-white/50 uppercase">
               YEAR RANGE
             </label>
@@ -124,7 +157,7 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
               {yearRange[0]} - {yearRange[1]}
             </span>
           </div>
-          <div className="w-full h-[46px] bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl px-5 flex items-center">
+          <div className="w-full h-[46px] bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 rounded-xl px-5 flex items-center touch-pan-y">
             <Slider
               range
               min={2016}
@@ -134,22 +167,32 @@ export default function InventoryFilters({ filters, setFilters }: InventoryFilte
               trackStyle={{ backgroundColor: '#C8A45D', height: 4 }}
               railStyle={{ backgroundColor: 'rgba(200, 164, 93, 0.2)', height: 4 }}
               handleStyle={[
-                { borderColor: '#C8A45D', backgroundColor: '#FAF8F4', opacity: 1, width: 16, height: 16, marginTop: -6, boxShadow: '0 0 10px rgba(200,164,93,0.4)' },
-                { borderColor: '#C8A45D', backgroundColor: '#FAF8F4', opacity: 1, width: 16, height: 16, marginTop: -6, boxShadow: '0 0 10px rgba(200,164,93,0.4)' }
+                { borderColor: '#C8A45D', backgroundColor: '#FAF8F4', opacity: 1, width: 18, height: 18, marginTop: -7, boxShadow: '0 0 10px rgba(200,164,93,0.4)' },
+                { borderColor: '#C8A45D', backgroundColor: '#FAF8F4', opacity: 1, width: 18, height: 18, marginTop: -7, boxShadow: '0 0 10px rgba(200,164,93,0.4)' }
               ]}
               className="w-full"
             />
           </div>
         </div>
 
-        {/* Square Filter Button Accent */}
-        <div className="shrink-0 self-end">
-          <button 
-            className="w-[46px] h-[46px] rounded-xl bg-[#C8A45D] text-black hover:bg-[#b8944d] flex items-center justify-center transition-all shadow-md hover:scale-105"
-            aria-label="Filter Options"
-          >
-            <SlidersHorizontal size={18} />
-          </button>
+        {/* Action Button: Clear/Reset or Active state */}
+        <div className="hidden md:flex shrink-0 self-end">
+          {isFiltered ? (
+            <button 
+              onClick={resetFilters}
+              className="h-[46px] px-4 rounded-xl bg-[#C8A45D] text-black hover:bg-[#b8944d] flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider transition-all shadow-md hover:scale-105"
+              aria-label="Reset Filters"
+            >
+              <span>Reset</span>
+            </button>
+          ) : (
+            <div 
+              className="w-[46px] h-[46px] rounded-xl bg-[#111111]/5 dark:bg-white/5 text-[#C8A45D] flex items-center justify-center border border-[#111111]/10 dark:border-white/10"
+              aria-hidden="true"
+            >
+              <SlidersHorizontal size={18} />
+            </div>
+          )}
         </div>
 
       </div>
