@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle, ShieldCheck, Zap, Activity, Car, IndianRupee, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import ShowroomCarousel from "@/components/ShowroomCarousel";

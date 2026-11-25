@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
-import { ArrowRight, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function Footer() {
   const pathname = usePathname();

@@ -3,22 +3,18 @@
 import { motion } from "framer-motion";
 import { 
   FileText, 
-  ClipboardCheck, 
   IndianRupee, 
-  Car, 
   CheckCircle, 
   ShieldCheck, 
   Clock, 
   Star, 
-  Shield, 
   TrendingUp, 
   ChevronDown, 
   ArrowRight,
   Gauge,
   Users,
   Handshake,
-  Lock,
-  Sparkles
+  Lock
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";

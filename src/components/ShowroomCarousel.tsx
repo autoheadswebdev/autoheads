@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/Button";
 
 export default function ShowroomCarousel({ cars = [] }: { cars?: any[] }) {

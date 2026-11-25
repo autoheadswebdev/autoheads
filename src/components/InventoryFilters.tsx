@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, SlidersHorizontal, Car, Droplets, Gauge, Sparkles } from "lucide-react";
+import { ChevronDown, SlidersHorizontal, Car, Droplets, Gauge } from "lucide-react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 

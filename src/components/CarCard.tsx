@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Heart, Gauge, Droplets, Sliders } from "lucide-react";
+import { ArrowRight, Gauge, Droplets, Sliders } from "lucide-react";
 
 export type CarProps = {
   id: string;

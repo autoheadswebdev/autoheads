@@ -10,8 +10,7 @@ import {
   Car, 
   Star, 
   CheckCircle2, 
-  ArrowRight,
-  Sparkles
+  ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";

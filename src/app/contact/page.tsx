@@ -4,12 +4,11 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { 
-  Phone, Mail, MapPin, MessageSquare, 
+  Phone, Mail, MapPin, 
   ShieldCheck, Award, HeadphonesIcon, Clock, 
-  Lock, ChevronDown, ArrowUpRight, ExternalLink,
-  MessageCircle
+  Lock, ChevronDown, ArrowUpRight, ExternalLink
 } from "lucide-react";
-import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/Button";
 
 export default function ContactPage() {

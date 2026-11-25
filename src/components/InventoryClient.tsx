@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { LayoutGrid, List, ArrowRight, ShieldCheck, Award, FileText, Lock, CheckCircle2 } from "lucide-react";
+import { LayoutGrid, List, ArrowRight, Award, FileText, Lock, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import InventoryFilters, { FilterState } from "@/components/InventoryFilters";
 import CarCard, { CarProps } from "@/components/CarCard";
